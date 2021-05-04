@@ -1,0 +1,72 @@
+﻿@using Tarot.Web.Models
+@model LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TAROT MYSTERY</title>
+    <!-- custom-theme -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elegant Login Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //custom-theme  -->
+    <link href="~/Assets/LoginAdmin/css/style.css" rel="stylesheet" />
+    <!-- font-awesome icons -->
+    <link href="~/Assets/LoginAdmin/css/font-awesome.css" rel="stylesheet" />
+    <!-- //font-awesome icons -->
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+</head>
+<body>
+    <div class="login-form w3_form">
+        <!--  Title-->
+        <div class="login-title w3_title">
+            <h1>TarotMystery-Admin</h1>
+        </div>
+        <div class="login w3_login">
+            <h2 class="login-header w3_header">Đăng nhập</h2>
+            <div class="w3l_grid">
+                @using (Html.BeginForm("Login", "UserLogin", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+                    <div class="form-group" style="margin-left:100px;display:flex">
+                        <div style="width:100px; margin-top:12px">Tài khoản</div>
+                        <div class="col-md-10" style=" margin-top: 7px;">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autofocus = "autofocus" })
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left:100px;display:flex">
+                        <div style="width:100px; margin-top:25px">Mật khẩu</div>
+                        <div class="col-md-10" style="margin-top:22px">
+                            @Html.PasswordFor(model => model.PassWord, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left:145px;margin-top: 22px;margin-bottom: 20px;">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.RememberMe)
+                                Ghi nhớ
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;">
+                        <div class="form-group" style="margin-left:45px">
+                            <div class="col-md-offset-2 col-md-10" style="margin-left:100px">
+                                <input type="submit" value="Đăng Nhập" class="btn btn-default" style="background-color:#00ff90;color:#000000;height: 40px;border: yellowgreen;font-size: inherit;" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\obj\Debug\Tarot.Model.csprojAssemblyReference.cache
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\obj\Debug\Tarot.Model.csproj.CoreCompileInputs.cache
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\Tarot.Model.dll.config
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\Tarot.Model.dll
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\Tarot.Model.pdb
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\EntityFramework.dll
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\PagedList.dll
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\PagedList.Mvc.dll
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\EntityFramework.xml
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\PagedList.xml
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\bin\Debug\PagedList.Mvc.xml
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\obj\Debug\Tarot.Model.csproj.CopyComplete
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\obj\Debug\Tarot.Model.dll
+C:\Users\namzo\source\repos\Tarot\Tarot.Model\obj\Debug\Tarot.Model.pdb
