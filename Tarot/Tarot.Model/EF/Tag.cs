@@ -16,7 +16,7 @@
 
         public int ID { get; set; }
 
-        [Display(Name = "Thẻ tên")]
+        [Display(Name = "Thẻ bài viết")]
         [StringLength(500)]
         public string NameTag { get; set; }
 

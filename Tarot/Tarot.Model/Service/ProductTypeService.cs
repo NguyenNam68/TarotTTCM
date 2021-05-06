@@ -19,9 +19,14 @@ namespace Tarot.Model.Service
         {
             return db.ProductTypes.Find(id);
         }
-        public IEnumerable<ProductType> DanhSachLSPPaging(int page, int pageSize)
+        public IEnumerable<ProductType> DanhSachLSPPaging(string search, int page, int pageSize)
         {
-            return db.ProductTypes.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            IQueryable<ProductType> model = db.ProductTypes;
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.TypeName.Contains(search));
+            }
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
         public int Insert(ProductType entity)
         {

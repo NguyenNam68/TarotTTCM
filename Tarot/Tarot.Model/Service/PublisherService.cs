@@ -19,9 +19,14 @@ namespace Tarot.Model.Service
         {
             return db.Publishers.Find(id);
         }
-        public IEnumerable<Publisher> DanhSachNXBPaging(int page, int pageSize)
+        public IEnumerable<Publisher> DanhSachNXBPaging(string search,int page, int pageSize)
         {
-            return db.Publishers.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            IQueryable<Publisher> model = db.Publishers;
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.Name.Contains(search));
+            }
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
         public int Insert(Publisher entity)
         {

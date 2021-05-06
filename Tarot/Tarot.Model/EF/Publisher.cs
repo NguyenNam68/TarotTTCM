@@ -17,7 +17,7 @@
 
         public int ID { get; set; }
 
-        [Display(Name = "Tên nhà xuất bản")]
+        [Display(Name = "Nhà xuất bản")]
         [StringLength(500)]
         public string Name { get; set; }
 

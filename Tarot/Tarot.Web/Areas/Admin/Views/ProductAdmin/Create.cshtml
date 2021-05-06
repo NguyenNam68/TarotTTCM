@@ -4,7 +4,18 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
 }
-
+@section jsFooter{
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+    </script>
+}
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
@@ -19,17 +30,8 @@
                             </div>
 
                             <div class="card-body card-block" style="background:#00ffff;color: black;">
-                                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    <div class="row form-group">
-                                        <div class="col col-md-4">
-                                            @Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class = "control-label " })
-                                        </div>
-                                        <div class="col-12 col-md-3">
-                                            @Html.DropDownListFor(model => model.TypeID, null, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
                                     <div class="row form-group">
                                         <div class="col col-md-4">
                                             @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label " })
@@ -59,29 +61,30 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-4">
-                                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
+                                            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label " })
                                         </div>
                                         <div class="col-12 col-md-8">
-                                            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                            @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-4">
-                                            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label " })
+                                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
 
                                         </div>
                                         <div class="col-12 col-md-8">
-                                            @Html.EditorFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-4">
                                             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label " })
                                         </div>
-                                        <div class="col-12 col-md-8">
-                                            <input type="file" id="file-input" name="file-input" class="form-control-file">
+                                        <div class="col-12 col-md-8" style="display:flex">
+                                            @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control"}, @style = "width: 218px", @id="txtImage" })
+                                            <a id="btnSelectImage" style=" margin-left: 10px;">Chọn ảnh</a>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -105,7 +108,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                
                             </div>
                             <div class="card-footer">
                                 <div class="form-group" style="display:flex">

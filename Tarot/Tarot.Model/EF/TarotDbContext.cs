@@ -12,34 +12,24 @@ namespace Tarot.Model.EF
         {
         }
 
-        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<ContentTag> ContentTags { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<NewCategory> NewCategories { get; set; }
         public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<OnlinePaying> OnlinePayings { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductTag> ProductTags { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<RegisterStudent> RegisterStudents { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cart>()
-                .Property(e => e.Discount)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Cart>()
-                .Property(e => e.Price)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Cart>()
-                .Property(e => e.CreatedBy)
-                .IsUnicode(false);
-
             modelBuilder.Entity<ContentTag>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
@@ -58,6 +48,10 @@ namespace Tarot.Model.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<News>()
+                .Property(e => e.Image)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<News>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
@@ -67,14 +61,26 @@ namespace Tarot.Model.EF
                 .HasForeignKey(e => e.NewID)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<OnlinePaying>()
+                .Property(e => e.CodeAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<OnlinePaying>()
+                .Property(e => e.Image)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<OnlinePaying>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
             modelBuilder.Entity<PaymentMethod>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PaymentMethod>()
-                .HasMany(e => e.Carts)
+                .HasMany(e => e.OnlinePayings)
                 .WithRequired(e => e.PaymentMethod)
-                .HasForeignKey(e => e.PaymentID)
+                .HasForeignKey(e => e.Method)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ProductCategory>()
@@ -96,22 +102,31 @@ namespace Tarot.Model.EF
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
+                .Property(e => e.TopHot)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Product>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.Carts)
+                .HasMany(e => e.ProductTags)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ProductTag>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
 
             modelBuilder.Entity<ProductType>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ProductType>()
-                .HasMany(e => e.Products)
-                .WithOptional(e => e.ProductType)
-                .HasForeignKey(e => e.TypeID);
+                .HasMany(e => e.ProductTags)
+                .WithRequired(e => e.ProductType)
+                .HasForeignKey(e => e.TypeID)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Publisher>()
                 .Property(e => e.CreatedBy)
@@ -123,6 +138,14 @@ namespace Tarot.Model.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<RegisterStudent>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Store>()
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Store>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 

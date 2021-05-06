@@ -11,7 +11,7 @@
     {
         public int ID { get; set; }
 
-        [Display(Name = "Email của học viên đăng ký")]
+        [Display(Name = "Email")]
         [Required]
         [StringLength(500)]
         public string Email { get; set; }
@@ -20,6 +20,7 @@
         [Column(TypeName = "date")]
         public DateTime? CreatedDate { get; set; }
 
+        [Display(Name = "Người tạo")]
         [StringLength(500)]
         public string CreatedBy { get; set; }
 

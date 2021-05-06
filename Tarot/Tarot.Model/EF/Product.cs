@@ -11,14 +11,12 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            Carts = new HashSet<Cart>();
+            ProductTags = new HashSet<ProductTag>();
         }
 
         public int ID { get; set; }
-        [Display(Name = "Loại sản phẩm")]
-        public int? TypeID { get; set; }
 
-        [Display(Name = "Danh mục sản phẩm")]
+        [Display(Name = "Danh mục")]
         public int CategoryID { get; set; }
 
         [Display(Name = "Nhà xuất bản")]
@@ -47,14 +45,14 @@
         [Display(Name = "Giá")]
         public decimal? Price { get; set; }
 
-        [Display(Name = "Sản phẩm nổi bật")]
-        [StringLength(500)]
+        [StringLength(50)]
         public string TopHot { get; set; }
 
         [Display(Name = "Lượt xem")]
         public int? ViewCount { get; set; }
 
         [Display(Name = "Ngày tạo")]
+        [Column(TypeName = "date")]
         public DateTime? CreatedDate { get; set; }
 
         [Display(Name = "Người tạo")]
@@ -64,13 +62,11 @@
         [Display(Name = "Tình trạng")]
         public bool Status { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
-
         public virtual ProductCategory ProductCategory { get; set; }
 
-        public virtual ProductType ProductType { get; set; }
-
         public virtual Publisher Publisher { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductTag> ProductTags { get; set; }
     }
 }

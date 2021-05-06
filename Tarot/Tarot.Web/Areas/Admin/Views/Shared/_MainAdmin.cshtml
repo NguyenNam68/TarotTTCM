@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
+    <meta name="author" content="Nam Nguyen">
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
@@ -82,14 +82,14 @@
                     <ul class="list-unstyled navbar__list">
                         <li>
                             <a href="@Url.Action("Index","HomeAdmin")">
-                                <i class="fas fa-tachometer-alt"></i>Thống kê
+                                <i class="fas fa-tachometer-alt"></i>Thống Kê
                             </a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Bảng dữ liệu
+                                <i class="fas fa-table"></i>Bảng Dữ Liệu
                             </a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list" style="list-style:decimal">
                                 <li>
                                     <a href="@Url.Action("Index","ProductCategoryAdmin")">Danh mục sản phẩm</a>
                                 </li>
@@ -97,31 +97,37 @@
                                     <a href="@Url.Action("Index","ProductAdmin")">Sản phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="index3.html">Phân loại sản phẩm</a>
+                                    <a href="@Url.Action("Index","ProductTypeAdmin")">Loại sản phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Nhà xuất bản</a>
+                                    <a href="@Url.Action("Index","PublisherAdmin")">Nhà xuất bản</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Danh sách học viên đăng ký</a>
+                                    <a href="@Url.Action("Index","NewCategoryAdmin")">Danh mục bài viết</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Bài viết</a>
+                                    <a href="@Url.Action("Index","NewAdmin")">Bài viết</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Đơn hàng</a>
+                                    <a href="@Url.Action("Index","TagAdmin")">Thẻ bài viết</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Thẻ liên kết</a>
+                                    <a href="@Url.Action("Index","CartAdmin")">Đơn hàng</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Phương thức liên hệ</a>
+                                    <a href="@Url.Action("Index","PaymentAdmin")">Phương thức thanh toán</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Phản hồi khách hàng</a>
+                                    <a href="@Url.Action("Index","OnlinePayingAdmin")">Thanh toán trực tuyến</a>
                                 </li>
                                 <li>
-                                    <a href="index4.html">Phương thức thanh toán</a>
+                                    <a href="@Url.Action("Index","StoreAdmin")">Cửa hàng</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","StudentAdmin")">Danh sách học viên đăng ký</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","FeedbackAdmin")">Phản hồi khách hàng</a>
                                 </li>
                             </ul>
                         </li>
@@ -143,10 +149,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
+                                
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
@@ -159,7 +162,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
+                                                    <img src="#" alt="Michelle Moreno" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Michelle Moreno</h6>
@@ -169,7 +172,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="#" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Diane Myers</h6>
@@ -191,7 +194,7 @@
                                             </div>
                                             <div class="email__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
+                                                    <img src="#" alt="Cynthia Harvey" />
                                                 </div>
                                                 <div class="content">
                                                     <p>Meeting about new dashboard...</p>
@@ -200,7 +203,7 @@
                                             </div>
                                             <div class="email__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
+                                                    <img src="#" alt="Cynthia Harvey" />
                                                 </div>
                                                 <div class="content">
                                                     <p>Meeting about new dashboard...</p>
@@ -209,7 +212,7 @@
                                             </div>
                                             <div class="email__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
+                                                    <img src="#" alt="Cynthia Harvey" />
                                                 </div>
                                                 <div class="content">
                                                     <p>Meeting about new dashboard...</p>
@@ -298,8 +301,6 @@
     <!-- Jquery JS-->
     <script src="~/Areas/Layout/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="~/Areas/Layout/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="~/Areas/Layout/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
     <script src="~/Areas/Layout/vendor/slick/slick.min.js"></script>
     <script src="~/Areas/Layout/vendor/wow/wow.min.js"></script>
@@ -312,9 +313,10 @@
     <script src="~/Areas/Layout/vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="~/Areas/Layout/vendor/select2/select2.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/Areas/Layout/plugins/ckfinder_aspnet_2.6.3/ckfinder/ckfinder.js"></script>
     <!-- Main JS-->
     <script src="~/Areas/Layout/js/main.js"></script>
-
+    @RenderSection("jsFooter",required:false)
 </body>
 
 </html>

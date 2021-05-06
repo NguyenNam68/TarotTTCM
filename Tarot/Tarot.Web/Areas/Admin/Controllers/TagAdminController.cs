@@ -8,13 +8,14 @@ using Tarot.Model.Service;
 
 namespace Tarot.Web.Areas.Admin.Controllers
 {
-    public class TagAdminController : Controller
+    public class TagAdminController : BaseController
     {
         // GET: Admin/TagAdmin
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string search,int page = 1, int pageSize = 5)
         {
             var service = new TagService();
-            var model = service.ListNameTagPaging(page, pageSize);
+            var model = service.ListNameTagPaging(search,page, pageSize);
+            ViewBag.Search = search;
             return View(model);
         }
         public ActionResult Create()
@@ -46,7 +47,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             return View(tag);
         }
         [HttpPost]
-        public ActionResult EditTag(Tag tag)
+        public ActionResult Edit(Tag tag)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        public ActionResult DeleteTag(int id)
+        public ActionResult Delete(int id)
         {
             new TagService().Delete(id);
 

@@ -15,7 +15,8 @@
         }
 
         public int ID { get; set; }
-        [Display(Name = "Danh mục sản phẩm")]
+
+        [Display(Name = "Danh mục")]
         [StringLength(500)]
         public string CategoryName { get; set; }
 

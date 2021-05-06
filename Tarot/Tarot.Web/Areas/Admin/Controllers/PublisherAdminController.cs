@@ -11,10 +11,11 @@ namespace Tarot.Web.Areas.Admin.Controllers
     public class PublisherAdminController : BaseController
     {
         // GET: Admin/PublisherAdmin
-        public ActionResult Index(int page=1, int pageSize=5)
+        public ActionResult Index(string search,int page=1, int pageSize=5)
         {
             var service = new PublisherService();
-            var model = service.DanhSachNXBPaging(page, pageSize);
+            var model = service.DanhSachNXBPaging(search,page, pageSize);
+            ViewBag.Search = search;
             return View(model);
         }
         public ActionResult Create()
@@ -46,7 +47,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             return View(publisher);
         }
         [HttpPost]
-        public ActionResult EditPublisher(Publisher publisher)
+        public ActionResult Edit(Publisher publisher)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        public ActionResult DeletePublisher(int id)
+        public ActionResult Delete(int id)
         {
             new PublisherService().Delete(id);
 

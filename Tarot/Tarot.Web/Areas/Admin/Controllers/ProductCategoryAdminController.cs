@@ -11,10 +11,11 @@ namespace Tarot.Web.Areas.Admin.Controllers
     public class ProductCategoryAdminController : BaseController
     {
         // GET: Admin/ProductCategoryAdmin
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string search,int page = 1, int pageSize = 5)
         {
             var service = new ProductCategoryService();
-            var model = service.DanhSachSPPaging(page, pageSize);
+            var model = service.DanhSachSPPaging(search,page, pageSize);
+            ViewBag.Search = search;
             return View(model);
         }
         public ActionResult Create()

@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<Tarot.Model.EF.OnlinePaying>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
+}
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- DATA TABLE -->
+                    <h3 class="title-5 m-b-35" style="text-align:center">THÔNG TIN THANH TOÁN TRỰC TUYẾN CỦA BẠN</h3>
+                    <div class="table-data__tool">
+                        <div class="table-data__tool-left" style=" margin-left: 20px;display:flex">
+                            <div class="rs-select2--light rs-select2--sm">
+                                <select class="js-select2" name="time">
+                                    <option selected="selected">Today</option>
+                                    <option value="">3 Days</option>
+                                    <option value="">1 Week</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            @using (Html.BeginForm("Index", "OnlinePayingAdmin", FormMethod.Get))
+                            {
+                                <div>
+                                    <form class="form-header" action="" method="POST">
+                                        <input class="au-input au-input--xl" type="text" name="search" value="@ViewBag.Search" placeholder="Tìm kiếm loại sản phẩm" style="height: 41px" />
+                                        <button class="au-btn--submit" type="submit">
+                                            <i class="zmdi zmdi-search" style="font-size: 38px;margin-top: -5px; color:black"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                        <div class="table-data__tool-right" style="margin-right: 100px;">
+                            @Html.ActionLink("Thêm Mới", "Create")
+                        </div>
+                    </div>
+                    <div class="table-responsive table-responsive-data2">
+                        <table class="table table-data2" style="background-color:#99CCFF;padding-left:0px">
+                            <thead>
+                                <tr>
+                                    <th>Hình ảnh</th>
+                                    <th>Thanh toán trực tuyến</th>
+                                    <th>Chủ tài khoản</th>
+                                    <th>Mã số tài khoản</th>
+                                    <th>Chi nhánh</th>
+                                    <th>Tình trạng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr class="tr-shadow" id="row_@item.ID">
+                                    <td><img src="@item.Image" style="width:182px;height:65px" /></td>
+                                    <td>@item.NamePay</td>
+                                    <td>@item.NameAccount</td>
+                                    <td>@item.CodeAccount</td>
+                                    <td>@item.Address</td>
+                                    <td>@(item.Status ? "Đang hoạt động" : "Đã khóa")</td>
+                                    <td>
+                                        <div class="table-data-feature item">
+                                            <a href="@Url.Action("Edit", new { id = @item.ID })">Sửa</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-data-feature item">
+                                            @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                       {
+                                           Confirm = "Bạn có chắc chắn muốn xóa không?",
+                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                           HttpMethod = "Delete"
+                                       })
+                                        </div>
+                                    </td>
+                                </tr>
+                                    <tr class="spacer"></tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div style="margin-top:10px">
+                            <p>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount</p>
+                        </div>
+                        <div class="middle_list" style="margin-left:400px">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @search = ViewBag.Search }))
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- END DATA TABLE -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -11,10 +11,11 @@ namespace Tarot.Web.Areas.Admin.Controllers
     public class PaymentAdminController : BaseController
     {
         // GET: Admin/PaymentAdmin
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string search, int page = 1, int pageSize = 5)
         {
             var service = new PaymentService();
-            var model = service.DanhSachTTPaging(page, pageSize);
+            var model = service.DanhSachTTPaging(search,page, pageSize);
+            ViewBag.Search = search;
             return View(model);
         }
         public ActionResult Create()
@@ -46,7 +47,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             return View(payment);
         }
         [HttpPost]
-        public ActionResult EditPayment(PaymentMethod payment)
+        public ActionResult Edit(PaymentMethod payment)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        public ActionResult DeletePayment(int id)
+        public ActionResult Delete(int id)
         {
             new PaymentService().Delete(id);
 

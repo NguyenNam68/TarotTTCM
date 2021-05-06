@@ -12,31 +12,29 @@ namespace Tarot.Web.Areas.Admin.Controllers
     {
         // GET: Admin/ProductAdmin
         [HttpGet]
-        public ActionResult Index(int page = 1, int pageSize = 8)
+        public ActionResult Index(string search,int page = 1, int pageSize = 5)
         {
             var service = new ProductService(); 
 
-            var model = service.DanhSachSPPaging(page, pageSize);
+            var model = service.DanhSachSPPaging(search,page, pageSize);
+            ViewBag.Search = search;
+
+
             return View(model);
         }
-        public void SetViewBagType(long? selectedTypeID = null)
-        {
-            var service = new ProductService();
-            ViewBag.TypeID = new SelectList(service.ListAllType(), "ID", "TypeName", selectedTypeID);
-        }
-        public void SetViewBagCategory(long? selectedCategoryID = null)
+        public void SetViewBagCategory(int? selectedCategoryID = null)
         {
             var service = new ProductService();
             ViewBag.CategoryID = new SelectList(service.ListAllCategory(), "ID", "CategoryName", selectedCategoryID);
         }
-        public void SetViewBagPublisher(long? selectedPublisherID = null)
+        public void SetViewBagPublisher(int? selectedPublisherID = null)
         {
             var service = new ProductService();
             ViewBag.PublisherID = new SelectList(service.ListAllPublisher(), "ID", "Name", selectedPublisherID);
         }
+        [HttpGet]
         public ActionResult Create()
         {
-            SetViewBagType();
             SetViewBagCategory();
             SetViewBagPublisher();
             return View();
@@ -54,15 +52,46 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm mới thành công");
+                    ModelState.AddModelError("", "Thêm sản phẩm thành công!");
                 }
             }
+            SetViewBagCategory(product.CategoryID);
+            SetViewBagPublisher(product.PublisherID);
             return View("Index");
         }
-        public ActionResult EditProduct(int id)
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
             var product = new ProductService().ViewDetail(id);
+            SetViewBagCategory(product.CategoryID);
+            SetViewBagPublisher(product.PublisherID);
             return View(product);
+        }
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = new ProductService();
+                var result = service.Update(product);
+                if (result)
+                {
+                    return RedirectToAction("Index", "ProductAdmin");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật sản phẩm thành công!");
+                }
+            }
+            SetViewBagCategory(product.CategoryID);
+            SetViewBagPublisher(product.PublisherID);
+            return View("Index");
+        }
+        public ActionResult Delete(int id)
+        {
+            new ProductService().Delete(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

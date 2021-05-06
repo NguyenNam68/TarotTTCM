@@ -15,10 +15,6 @@ namespace Tarot.Model.Service
         {
             db = new TarotDbContext();
         }
-        public List<ProductType> ListAllType()
-        {
-            return db.ProductTypes.Where(x => x.Status == true).ToList();
-        }
         public List<ProductCategory> ListAllCategory()
         {
             return db.ProductCategories.Where(x => x.Status == true).ToList();
@@ -31,9 +27,14 @@ namespace Tarot.Model.Service
         {
             return db.Products.Find(id);
         }
-        public IEnumerable<Product> DanhSachSPPaging(int page,int pageSize)
+        public IEnumerable<Product> DanhSachSPPaging(string search, int page,int pageSize)
         {
-            return db.Products.OrderByDescending(x=>x.CreatedDate).ToPagedList(page,pageSize);
+            IQueryable<Product> model = db.Products;
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.ProductName.Contains(search));
+            }
+            return model.OrderByDescending(x=>x.CreatedDate).ToPagedList(page,pageSize);
         }
         public int Insert(Product entity)
         {
@@ -46,9 +47,27 @@ namespace Tarot.Model.Service
             try
             {
                 var product = db.Products.Find(entity.ID);
+                product.CategoryID = entity.CategoryID;
+                product.PublisherID = entity.PublisherID;
+                product.ProductName = entity.ProductName;
                 product.Price = entity.Price;
-                product.CreatedBy = entity.CreatedBy;
+                product.PromotionPrice = entity.PromotionPrice;
                 product.CreatedDate = DateTime.Now;
+
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                var product = db.Products.Find(id);
+                db.Products.Remove(product);
                 db.SaveChanges();
                 return true;
             }

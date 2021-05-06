@@ -23,8 +23,12 @@
         [Column(TypeName = "ntext")]
         public string Content { get; set; }
 
-        [Display(Name = "Thuộc danh mục")]
+        [Display(Name = "Danh mục")]
         public int NewCategoryID { get; set; }
+
+        [Display(Name = "Hình ảnh")]
+        [StringLength(500)]
+        public string Image { get; set; }
 
         [Display(Name = "Ngày tạo")]
         [Column(TypeName = "date")]

@@ -8,13 +8,14 @@ using Tarot.Model.Service;
 
 namespace Tarot.Web.Areas.Admin.Controllers
 {
-    public class NewCategoryAdminController : Controller
+    public class NewCategoryAdminController : BaseController
     {
         // GET: Admin/NewCategoryAdmin
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string search,int page = 1, int pageSize = 5)
         {
             var service = new NewCategoryService();
-            var model = service.ListNewCategoryPaging(page, pageSize);
+            var model = service.ListNewCategoryPaging(search,page, pageSize);
+            ViewBag.Search = search;
             return View(model);
         }
         public ActionResult Create()
@@ -46,7 +47,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             return View(newCategory);
         }
         [HttpPost]
-        public ActionResult EditNewCategory(NewCategory newCategory)
+        public ActionResult Edit(NewCategory newCategory)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        public ActionResult DeleteNewCategory(int id)
+        public ActionResult Delete(int id)
         {
             new NewCategoryService().Delete(id);
 

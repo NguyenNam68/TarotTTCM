@@ -1,0 +1,102 @@
+﻿@model Tarot.Model.EF.News
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
+}
+@section jsFooter{
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+    </script>
+}
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card" style="margin-left: 300px;width: 600px;">
+                        @using (Html.BeginForm("CreateNew", "NewAdmin", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="card-header" style="text-align:center;color: steelblue;">
+                                <strong>Thêm Mới Bài Viết</strong>
+                            </div>
+
+                            <div class="card-body card-block" style="background:#00ffff;color: black;">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="row form-group">
+                                    <div class="col col-md-4">
+                                        @Html.LabelFor(model => model.NewCategoryID, htmlAttributes: new { @class = "control-label " })
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        @Html.DropDownListFor(model => model.NewCategoryID, null, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NewCategoryID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">
+                                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label " })
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">
+                                        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label " })
+
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">
+                                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label " })
+                                    </div>
+                                    <div class="col-12 col-md-8" style="display:flex">
+                                        @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, @style = "width: 218px", @id = "txtImage" })
+                                        <a id="btnSelectImage" style=" margin-left: 10px;">Chọn ảnh</a>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">
+                                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label " })
+                                    </div>
+                                    <div class="col-12 col-md-5">
+                                        <div style="display:flex;margin-left:-155px;margin-top:8px">
+                                            @Html.CheckBoxFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                                            <p style="margin-left:-135px;margin-top:-6px">Đang hoạt động</p>
+                                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group" style="display:flex">
+                                    <div class="col-md-offset-2 col-md-10" style="">
+                                        <input type="submit" value="Thêm mới" class="btn btn-default" style="background: aquamarine;width:100px" />
+                                    </div>
+                                    <div style="margin-top:12px">
+                                        @Html.ActionLink("Quay lại", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

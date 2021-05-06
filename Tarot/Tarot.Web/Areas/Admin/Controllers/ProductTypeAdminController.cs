@@ -11,10 +11,11 @@ namespace Tarot.Web.Areas.Admin.Controllers
     public class ProductTypeAdminController : BaseController
     {
         // GET: Admin/ProductTypeAdmin
-        public ActionResult Index(int page=1, int pageSize=5)
+        public ActionResult Index(string search,int page=1, int pageSize=8)
         {
             var service = new ProductTypeService();
-            var model = service.DanhSachLSPPaging(page, pageSize);
+            var model = service.DanhSachLSPPaging(search,page, pageSize);
+            ViewBag.Search = search;
             return View(model);
         }
         public ActionResult Create()
@@ -46,7 +47,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             return View(productType);
         }
         [HttpPost]
-        public ActionResult EditProductType(ProductType productType)
+        public ActionResult Edit(ProductType productType)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        public ActionResult DeleteProductType(int id)
+        public ActionResult Delete(int id)
         {
             new ProductTypeService().Delete(id);
 

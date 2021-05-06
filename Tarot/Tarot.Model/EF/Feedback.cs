@@ -30,7 +30,6 @@
         [Column(TypeName = "date")]
         public DateTime? CreatedDate { get; set; }
 
-        [Display(Name = "Người viết")]
         [StringLength(500)]
         public string CreatedBy { get; set; }
 
