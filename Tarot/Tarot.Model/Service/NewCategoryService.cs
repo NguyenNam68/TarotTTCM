@@ -19,6 +19,13 @@ namespace Tarot.Model.Service
         {
             return db.NewCategories.Find(id);
         }
+        public bool ChangeStatus(int id)
+        {
+            var newcategory = db.NewCategories.Find(id);
+            newcategory.Status = !newcategory.Status;
+            db.SaveChanges();
+            return newcategory.Status;
+        }
         public IEnumerable<NewCategory> ListNewCategoryPaging(string search,int page, int pageSize)
         {
             IQueryable<NewCategory> model = db.NewCategories;

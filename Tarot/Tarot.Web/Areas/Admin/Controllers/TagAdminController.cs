@@ -31,11 +31,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 int id = service.Insert(tag);
                 if (id > 0)
                 {
+                    SetAlert("Thêm thẻ tên thành công!", "success");
                     return RedirectToAction("Index", "TagAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm thẻ tên thành công!");
+                    ModelState.AddModelError("", "Thêm thẻ tên thất bại!");
                 }
             }
             return View("Index");
@@ -55,11 +56,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(tag);
                 if (result)
                 {
+                    SetAlert("Cập nhật thẻ tên thành công!", "success");
                     return RedirectToAction("Index", "TagAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật thẻ tên thành công!");
+                    ModelState.AddModelError("", "Cập nhật thẻ tên thất bại!");
                 }
             }
             return View("Index");
@@ -69,6 +71,15 @@ namespace Tarot.Web.Areas.Admin.Controllers
             new TagService().Delete(id);
 
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new TagService().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }

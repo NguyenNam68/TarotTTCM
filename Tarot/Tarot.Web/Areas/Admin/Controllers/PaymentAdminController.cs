@@ -31,11 +31,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 int id = service.Insert(payment);
                 if (id > 0)
                 {
+                    SetAlert("Thêm phương thức thanh toán thành công!", "success");
                     return RedirectToAction("Index", "PaymentAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm phương thức thanh toán thành công!");
+                    ModelState.AddModelError("", "Thêm phương thức thanh toán thất bại!");
                 }
             }
             return View("Index");
@@ -55,11 +56,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(payment);
                 if (result)
                 {
+                    SetAlert("Cập nhật phương thức thanh toán thành công!", "success");
                     return RedirectToAction("Index", "PaymentAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật phương thức thanh toán thành công!");
+                    ModelState.AddModelError("", "Cập nhật phương thức thanh toán thất bại!");
                 }
             }
             return View("Index");
@@ -69,6 +71,14 @@ namespace Tarot.Web.Areas.Admin.Controllers
             new PaymentService().Delete(id);
 
             return RedirectToAction("Index");
+        }
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new PaymentService().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }

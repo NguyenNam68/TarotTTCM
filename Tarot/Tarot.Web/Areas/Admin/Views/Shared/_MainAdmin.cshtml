@@ -115,6 +115,9 @@
                                     <a href="@Url.Action("Index","CartAdmin")">Đơn hàng</a>
                                 </li>
                                 <li>
+                                    <a href="@Url.Action("Index","UserAdmin")">Thông tin tài khoản</a>
+                                </li>
+                                <li>
                                     <a href="@Url.Action("Index","PaymentAdmin")">Phương thức thanh toán</a>
                                 </li>
                                 <li>
@@ -148,9 +151,15 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                
-                            </form>
+                            <div class="form-header">
+                                @if (TempData["AlertMessage"] != null)
+                                {
+                                    <div id="AlertBox" class="alert @TempData["AlertType"] hide" style="margin-top:13px;margin-left:10px">
+                                        @TempData["AlertMessage"]
+                                    </div>
+                                }
+
+                            </div>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">

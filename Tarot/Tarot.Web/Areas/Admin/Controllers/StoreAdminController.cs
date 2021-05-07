@@ -31,11 +31,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 int id = service.Insert(store);
                 if (id > 0)
                 {
+                    SetAlert("Thêm cửa hàng thành công!", "success");
                     return RedirectToAction("Index", "StoreAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm cửa hàng thành công!");
+                    ModelState.AddModelError("", "Thêm cửa hàng thất bại!");
                 }
             }
             return View("Index");
@@ -55,11 +56,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(store);
                 if (result)
                 {
+                    SetAlert("Cập nhật cửa hàng thành công!", "success");
                     return RedirectToAction("Index", "StoreAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật cửa hàng thành công!");
+                    ModelState.AddModelError("", "Cập nhật cửa hàng thất bại!");
                 }
             }
             return View("Index");
@@ -69,6 +71,15 @@ namespace Tarot.Web.Areas.Admin.Controllers
             new StoreService().Delete(id);
 
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new StoreService().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }

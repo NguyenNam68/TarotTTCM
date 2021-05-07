@@ -25,7 +25,7 @@
         public string Name { get; set; }
 
         [Display(Name = "Giới tính")]
-        public bool? Gender { get; set; }
+        public bool Gender { get; set; }
 
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }

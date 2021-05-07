@@ -4,7 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
 }
-
+@section jsFooter{
+    <script src="~/Areas/Layout/js/controller/StoreController.js"></script>
+}
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
@@ -52,28 +54,28 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr class="tr-shadow" id="row_@item.ID">
-                                    <td>@item.NameStore</td>
-                                    <td>@item.Address</td>
-                                    <td>@item.TimeOpen</td>
-                                    <td>@item.Phone</td>
-                                    <td>@(item.Status ? "Mở cửa" : "Đóng cửa")</td>
-                                    <td>
-                                        <div class="table-data-feature item">
-                                            <a href="@Url.Action("Edit", new { id = @item.ID })">Sửa</a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="table-data-feature item">
-                                            @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-                                       {
-                                           Confirm = "Bạn có chắc chắn muốn xóa không?",
-                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
-                                           HttpMethod = "Delete"
-                                       })
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr class="tr-shadow" id="row_@item.ID">
+                                        <td>@item.NameStore</td>
+                                        <td>@item.Address</td>
+                                        <td>@item.TimeOpen</td>
+                                        <td>@item.Phone</td>
+                                        <td><a href="#" class="btn-active" data-id="@item.ID">@(item.Status ? "Mở cửa" : "Đóng cửa")</a></td>
+                                        <td>
+                                            <div class="table-data-feature item">
+                                                <a href="@Url.Action("Edit", new { id = @item.ID })">Sửa</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="table-data-feature item">
+                                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                           {
+                                               Confirm = "Bạn có chắc chắn muốn xóa không?",
+                                               OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                               HttpMethod = "Delete"
+                                           })
+                                            </div>
+                                        </td>
+                                    </tr>
                                     <tr class="spacer"></tr>
                                 }
                             </tbody>

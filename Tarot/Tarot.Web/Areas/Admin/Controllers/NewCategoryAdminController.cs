@@ -31,11 +31,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 int id = service.Insert(newCategory);
                 if (id > 0)
                 {
+                    SetAlert("Thêm danh mục bài viết thành công!", "success");
                     return RedirectToAction("Index", "NewCategoryAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm danh mục tin tức thành công!");
+                    ModelState.AddModelError("", "Thêm danh mục tin tức không thành công!");
                 }
             }
             return View("Index");
@@ -55,11 +56,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(newCategory);
                 if (result)
                 {
+                    SetAlert("Cập nhật danh mục bài viết thành công!", "success");
                     return RedirectToAction("Index", "NewCategoryAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật danh mục tin tức thành công!");
+                    ModelState.AddModelError("", "Cập nhật danh mục tin tức không thành công!");
                 }
             }
             return View("Index");
@@ -69,6 +71,15 @@ namespace Tarot.Web.Areas.Admin.Controllers
             new NewCategoryService().Delete(id);
 
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new NewCategoryService().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }

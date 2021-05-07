@@ -4,6 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
 }
+@section jsFooter{
+    <script src="~/Areas/Layout/js/controller/ProductController.js"></script>
+}
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
@@ -34,7 +37,7 @@
                             }
                         </div>
                         <div class="table-data__tool-right" style="margin-right: 100px;">
-                            @Html.ActionLink("Thêm Mới","Create")
+                            @Html.ActionLink("Thêm Mới", "Create")
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
@@ -51,28 +54,28 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr class="tr-shadow" id="row_@item.ID">
-                                    <td><img src="@item.Image" style="width:189px;height:189px"/></td>
-                                    <td>@item.ProductName</td>
-                                    <td>@item.Description</td>
-                                    <td>@item.Price</td>
-                                    <td>@(item.Status ? "Đang bán" : "Ngừng bán")</td>
-                                    <td>
-                                        <div class="table-data-feature item">
-                                            <a href="@Url.Action("Edit", new { id = @item.ID })"> Sửa</a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="table-data-feature item">
-                                            @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-                                       {
-                                           Confirm = "Bạn có chắc chắn muốn xóa không?",
-                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
-                                           HttpMethod = "Delete"
-                                       })
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr class="tr-shadow" id="row_@item.ID">
+                                        <td><img src="@item.Image" style="width:189px;height:189px" /></td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.Price</td>
+                                        <td><a href="#" class="btn-active" data-id="@item.ID">@(item.Status ? "Đang bán" : "Ngừng bán")</a></td>
+                                        <td>
+                                            <div class="table-data-feature item">
+                                                <a href="@Url.Action("Edit", new { id = @item.ID })"> Sửa</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="table-data-feature item">
+                                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                           {
+                                               Confirm = "Bạn có chắc chắn muốn xóa không?",
+                                               OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                               HttpMethod = "Delete"
+                                           })
+                                            </div>
+                                        </td>
+                                    </tr>
                                     <tr class="spacer"></tr>
                                 }
                             </tbody>

@@ -1,4 +1,7 @@
-
+$(function () {
+    $('#AlertBox').removeClass('hide');
+    $('#AlertBox').delay(500).slideUp(100);
+});
 (function ($) {
   // USE STRICT
   "use strict";

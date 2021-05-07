@@ -23,6 +23,13 @@ namespace Tarot.Model.Service
         {
             return db.News.Find(id);
         }
+        public bool ChangeStatus(int id)
+        {
+            var news = db.News.Find(id);
+            news.Status = !news.Status;
+            db.SaveChanges();
+            return news.Status;
+        }
         public IEnumerable<News> DanhSachNPaging(string search, int page, int pageSize)
         {
             IQueryable<News> model = db.News;

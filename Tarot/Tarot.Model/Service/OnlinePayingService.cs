@@ -23,6 +23,13 @@ namespace Tarot.Model.Service
         {
             return db.OnlinePayings.Find(id);
         }
+        public bool ChangeStatus(int id)
+        {
+            var onlinePaying = db.OnlinePayings.Find(id);
+            onlinePaying.Status = !onlinePaying.Status;
+            db.SaveChanges();
+            return onlinePaying.Status;
+        }
         public IEnumerable<OnlinePaying> DanhSachOPPaging(string search, int page, int pageSize)
         {
             IQueryable<OnlinePaying> model = db.OnlinePayings;

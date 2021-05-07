@@ -4,6 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
 }
+@section jsFooter{
+    <script src="~/Areas/Layout/js/controller/ProductCategoryController.js"></script>
+}
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
@@ -25,7 +28,7 @@
                             {
                                 <div>
                                     <form class="form-header" action="" method="POST">
-                                        <input class="au-input au-input--xl" type="text" name="search" value="@ViewBag.Search" placeholder="Tìm kiếm danh mục sản phẩm" style="height: 41px"/>
+                                        <input class="au-input au-input--xl" type="text" name="search" value="@ViewBag.Search" placeholder="Tìm kiếm danh mục sản phẩm" style="height: 41px" />
                                         <button class="au-btn--submit" type="submit">
                                             <i class="zmdi zmdi-search" style="font-size: 38px;margin-top: -5px; color:black"></i>
                                         </button>
@@ -50,7 +53,7 @@
                                 {
                                     <tr class="tr-shadow" id="row_@item.ID">
                                         <td>@item.CategoryName</td>
-                                        <td>@(item.Status ? "Đang hoạt động" : "Đã khóa")</td>
+                                        <td><a href="#" class="btn-active" data-id="@item.ID">@(item.Status ? "Đang hoạt động" : "Đã khóa")</a></td>
                                         <td>
                                             <div class="table-data-feature item">
                                                 <a href="@Url.Action("EditProductCategory", new { id = @item.ID })">Sửa</a>
@@ -58,7 +61,7 @@
                                         </td>
                                         <td>
                                             <div class="table-data-feature item">
-                                                @Ajax.ActionLink("Xóa", "DeleteProductCategory", new { @id=item.ID }, new AjaxOptions
+                                                @Ajax.ActionLink("Xóa", "DeleteProductCategory", new { @id = item.ID }, new AjaxOptions
                                            {
                                                Confirm = "Bạn có chắc chắn muốn xóa không?",
                                                OnComplete = "$('#row_" + @item.ID + "').remove()",
@@ -77,7 +80,7 @@
                         <div class="middle_list" style="margin-left:400px">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @search=ViewBag.Search }))
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @search = ViewBag.Search }))
                                 </ul>
                             </nav>
                         </div>

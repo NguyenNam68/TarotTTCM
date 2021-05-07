@@ -19,6 +19,13 @@ namespace Tarot.Model.Service
         {
             return db.PaymentMethods.Find(id);
         }
+        public bool ChangeStatus(int id)
+        {
+            var payment = db.PaymentMethods.Find(id);
+            payment.Status = !payment.Status;
+            db.SaveChanges();
+            return payment.Status;
+        }
         public IEnumerable<PaymentMethod> DanhSachTTPaging(string search,int page, int pageSize)
         {
             IQueryable<PaymentMethod> model = db.PaymentMethods;

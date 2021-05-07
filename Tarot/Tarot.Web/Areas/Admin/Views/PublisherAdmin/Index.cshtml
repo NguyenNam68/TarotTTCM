@@ -4,7 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
 }
-
+@section jsFooter{
+    <script src="~/Areas/Layout/js/controller/PublisherController.js"></script>
+}
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
@@ -51,7 +53,7 @@
                                 {
                                     <tr class="tr-shadow" id="row_@item.ID">
                                         <td>@item.Name</td>
-                                        <td>@(item.Status ? "Đang cung cấp" : "Ngừng cung cấp")</td>
+                                        <td><a href="#" class="btn-active" data-id="@item.ID">@(item.Status ? "Đang cung cấp" : "Ngừng cung cấp")</a></td>
                                         <td>
                                             <div class="table-data-feature item">
                                                 <a href="@Url.Action("Edit", new { id = @item.ID })">Sửa</a>

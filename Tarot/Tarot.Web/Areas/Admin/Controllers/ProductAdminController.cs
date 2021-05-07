@@ -48,11 +48,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 int id = service.Insert(product);
                 if (id > 0)
                 {
+                    SetAlert("Thêm sản phẩm thành công!", "success");
                     return RedirectToAction("Index", "ProductAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm sản phẩm thành công!");
+                    ModelState.AddModelError("", "Thêm sản phẩm thất bại!");
                 }
             }
             SetViewBagCategory(product.CategoryID);
@@ -76,11 +77,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(product);
                 if (result)
                 {
+                    SetAlert("Thêm sản phẩm thành công!", "success");
                     return RedirectToAction("Index", "ProductAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật sản phẩm thành công!");
+                    ModelState.AddModelError("", "Cập nhật sản phẩm thất bại!");
                 }
             }
             SetViewBagCategory(product.CategoryID);
@@ -92,6 +94,15 @@ namespace Tarot.Web.Areas.Admin.Controllers
             new ProductService().Delete(id);
 
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new ProductService().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }

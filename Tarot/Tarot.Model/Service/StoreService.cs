@@ -28,6 +28,13 @@ namespace Tarot.Model.Service
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
+        public bool ChangeStatus(int id)
+        {
+            var store = db.Stores.Find(id);
+            store.Status = !store.Status;
+            db.SaveChanges();
+            return store.Status;
+        }
         public int Insert(Store entity)
         {
             db.Stores.Add(entity);

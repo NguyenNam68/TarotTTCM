@@ -19,6 +19,13 @@ namespace Tarot.Model.Service
         {
             return db.ProductCategories.Find(id);
         }
+        public bool ChangeStatus(int id)
+        {
+            var productCategory = db.ProductCategories.Find(id);
+            productCategory.Status = !productCategory.Status;
+            db.SaveChanges();
+            return productCategory.Status;
+        }
         public IEnumerable<ProductCategory> DanhSachSPPaging(string search,int page, int pageSize)
         {
             IQueryable<ProductCategory> model = db.ProductCategories;

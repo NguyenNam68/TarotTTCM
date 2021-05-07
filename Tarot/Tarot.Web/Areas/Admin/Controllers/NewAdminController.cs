@@ -38,11 +38,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 int id = service.Insert(news);
                 if (id > 0)
                 {
+                    SetAlert("Thêm bài viết thành công!", "success");
                     return RedirectToAction("Index", "NewAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm bài viết mới thành công!");
+                    ModelState.AddModelError("", "Thêm bài viết mới thất bại!");
                 }
             }
             SetViewBagNew(news.NewCategoryID);
@@ -63,11 +64,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(news);
                 if (result)
                 {
+                    SetAlert("Cập nhật bài viết thành công!", "success");
                     return RedirectToAction("Index", "NewAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật bài viết thành công!");
+                    ModelState.AddModelError("", "Cập nhật bài viết thất bại!");
                 }
             }
             SetViewBagNew(news.NewCategoryID);
@@ -78,6 +80,15 @@ namespace Tarot.Web.Areas.Admin.Controllers
             new NewService().Delete(id);
 
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new NewService().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }

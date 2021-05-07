@@ -1,31 +1,159 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- Start Slider -->
+<div id="slides-shop" class="cover-slides">
+    <ul class="slides-container">
+        <li class="text-left">
+            <img src="~/DataImage/ImageHome/Slide/banner.jpg" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="m-b-20"><strong> CHÀO MỪNG ĐẾN VỚI <br> TAROT MYSTERY SHOP</strong></h1>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="text-center">
+            <img src="~/DataImage/ImageHome/Slide/open-banner.jpg" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="m-b-20"><strong>ĐẾN CỬA HÀNG MYSTERY TAROT VÀ CẢM NHẬN</strong></h1>
+                        <p class="m-b-40">32 ngách 31/14 Pháo Đài Láng, Láng Thượng, Đống Đa, Hà Nội</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="text-right">
+            <img src="~/DataImage/ImageHome/Slide/home-banner.jpg" />
+            <div class="container">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </div>
+        </li>
+    </ul>
+    <div class="slides-navigation">
+        <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
     </div>
 </div>
+<!-- End Slider -->
+<!-- Start Categories  -->
+<div class="categories-shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box">
+                    <img class="img-fluid" src="~/DataImage/ImageHome/Home/tarot_preview.jpg" />
+                    <a class="btn hvr-hover" href="#">BÀI TAROT</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box">
+                    <img class="img-fluid" src="~/DataImage/ImageHome/Home/oracle-preview.jpg" />
+                    <a class="btn hvr-hover" href="#">ORACLE & LENORMAND</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box">
+                    <img class="img-fluid" src="~/DataImage/ImageHome/Home/tarot-box.jpg" style="height:235px"/>
+                    <a class="btn hvr-hover" href="#">PHỤ KIỆN TAROT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Categories -->
+<!-- Start Products  -->
+<div class="products-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1 style="font-family: 'Montserrat';">BỘ BÀI MỚI NHẤT</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            <div class="col-lg-3 col-md-6 special-grid best-seller">
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb">
+                            <p class="sale">New</p>
+                        </div>
+                        <img src="~/DataImage/ImageHome/Home/tarot_preview.jpg" class="img-fluid" alt="Image" />
+                        <div class="mask-icon">
+                            <ul>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                            </ul>
+                            <a class="cart" href="#">Mua hàng</a>
+                        </div>
+                    </div>
+                    <div class="why-text">
+                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <h5> $7.79</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1 style="font-family: 'Montserrat';">BỘ BÀI NỔI BẬT</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            <div class="col-lg-3 col-md-6 special-grid best-seller">
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb">
+                            <p class="sale">HOT</p>
+                        </div>
+                        <img src="~/DataImage/ImageHome/Home/tarot_preview.jpg" class="img-fluid" alt="Image" />
+                        <div class="mask-icon">
+                            <ul>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                            </ul>
+                            <a class="cart" href="#">Mua hàng</a>
+                        </div>
+                    </div>
+                    <div class="why-text">
+                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <h5> $7.79</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Products  -->
+<!-- Start Register  -->
+<div class="latest-blog" style="background-color:aquamarine">
+    <div class="container" style="display:flex">
+        <div class="col-lg-6">
+            <div class="news_left_text">
+                <h1>ĐĂNG KÝ KHÓA HỌC TAROT CỦA CHÚNG TÔI</h1>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="newsletter_form">
+                <div class="input-group" style="height: 46px; margin-top: -10px;">
+                    <input type="text" class="form-control" placeholder="Nhập email của bạn">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" style="background-color:blanchedalmond">Đăng Ký</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Register  -->

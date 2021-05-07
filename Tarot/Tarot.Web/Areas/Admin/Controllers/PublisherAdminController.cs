@@ -31,11 +31,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 int id = service.Insert(publisher);
                 if (id > 0)
                 {
+                    SetAlert("Thêm nhà xuất bản thành công!", "success");
                     return RedirectToAction("Index", "PublisherAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm nhà xuất bản thành công!");
+                    ModelState.AddModelError("", "Thêm nhà xuất bản thất bại!");
                 }
             }
             return View("Index");
@@ -55,11 +56,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(publisher);
                 if (result)
                 {
+                    SetAlert("Cập nhật nhà xuất bản thành công!", "success");
                     return RedirectToAction("Index", "PublisherAdmin");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật nhà xuất bản thành công!");
+                    ModelState.AddModelError("", "Cập nhật nhà xuất bản thất bại!");
                 }
             }
             return View("Index");
@@ -69,6 +71,15 @@ namespace Tarot.Web.Areas.Admin.Controllers
             new PublisherService().Delete(id);
 
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public JsonResult ChangeStatus(int id)
+        {
+            var result = new PublisherService().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
         }
     }
 }

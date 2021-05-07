@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,50 @@ namespace Tarot.Model.Service
         {
             db = new TarotDbContext();
         }
+        public User ViewDetail(int id)
+        {
+            return db.Users.Find(id);
+        }
+        public IEnumerable<User> ListUserPaging(string search, int page, int pageSize)
+        {
+            IQueryable<User> model = db.Users;
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.UserName.Contains(search)||x.Email.Contains(search)||x.Name.Contains(search)||x.Address.Contains(search));
+            }
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+        }
+        public bool ChangeStatus(int id)
+        {
+            var user = db.Users.Find(id);
+            user.Status = !user.Status;
+            db.SaveChanges();
+            return user.Status;
+        }
         public int Insert(User entity)
         {
             db.Users.Add(entity);
             db.SaveChanges();
             return entity.ID;
+        }
+        public bool Update(User entity)
+        {
+            try
+            {
+                var user = db.Users.Find(entity.ID);
+                user.Name = entity.Name;
+                user.Gender = entity.Gender;
+                user.Address = entity.Address;
+                user.Phone = entity.Phone;
+                user.CreatedDate = DateTime.Now;
+
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public User GetByUsername(string username)
         {

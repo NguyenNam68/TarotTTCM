@@ -1,0 +1,91 @@
+﻿<header class="main-header">
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <div class="container">
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                    <img src="~/DataImage/ImageHome/Icon/mystichouse.png" class="logo"/>
+                </a>
+            </div>
+            <!-- End Header Navigation -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu" style="font-family: SANS-SERIF;">
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("Index","Home")">TRANG CHỦ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">GIỚI THIỆU VỀ TAROT</a></li>
+                    <li class="dropdown megamenu-fw">
+                        <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">SẢN PHẨM</a>
+                        <ul class="dropdown-menu megamenu-content" role="menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-menu col-md-3">
+                                        <h6 class="title">Top</h6>
+                                    </div>
+                                    <!-- end col-3 -->
+                                </div>
+                                <!-- end row -->
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">KIẾN THỨC TAROT</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cart.html">Cart</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ý NGHĨA 78 LÁ BÀI TAROT</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cart.html">Cart</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">LIÊN HỆ</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cart.html">Cart</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Start Atribute Navigation -->
+            <div class="attr-nav">
+                <ul>
+                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li class="side-menu">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Atribute Navigation -->
+        </div>
+        <!-- Start Side Menu -->
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            <ul>
+                <li class="cart-box">
+                    <ul class="cart-list">
+                        <li>
+                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">Delica omtantur </a></h6>
+                            <p>1x - <span class="price">$80.00</span></p>
+                        </li>
+                        <li class="total">
+                            <a href="#" class="btn btn-default hvr-hover btn-cart" style="color:black">VIEW CART</a>
+                            <span class="float-right"><strong>Total</strong>: $180.00</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- End Side Menu -->
+    </nav>
+    <!-- End Navigation -->
+</header>
