@@ -27,6 +27,23 @@ namespace Tarot.Model.Service
         {
             return db.Products.Find(id);
         }
+        public List<Product> ListNewProduct(int top)
+        {
+            return db.Products.Where(x=>x.Status==true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+        }
+        public List<Product> ListHotProduct(int top)
+        {
+            return db.Products.Where(x => x.TopHot == true&&x.Status==true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();        
+        }
+        public List<Product> ListRelatedProduct(int productID)
+        {
+            var product = db.Products.Find(productID);
+            return db.Products.Where(x => x.ID != productID &&x.CategoryID==product.CategoryID &&x.Status == true).ToList();
+        }
+        public List<Product> ListByCategoryID(int categoryID)
+        {
+            return db.Products.Where(x => x.CategoryID == categoryID && x.Status == true).OrderByDescending(x=>x.CreatedDate).ToList();
+        }
         public bool ChangeStatus(int id)
         {
             var product = db.Products.Find(id);
@@ -34,6 +51,15 @@ namespace Tarot.Model.Service
             db.SaveChanges();
             return product.Status;
         }
+
+        public bool ChangeHot(int id)
+        {
+            var product = db.Products.Find(id);
+            product.TopHot = !product.TopHot;
+            db.SaveChanges();
+            return product.TopHot;
+        }
+        
         public IEnumerable<Product> DanhSachSPPaging(string search, int page,int pageSize)
         {
             IQueryable<Product> model = db.Products;
@@ -54,7 +80,6 @@ namespace Tarot.Model.Service
             try
             {
                 var product = db.Products.Find(entity.ID);
-                product.CategoryID = entity.CategoryID;
                 product.PublisherID = entity.PublisherID;
                 product.ProductName = entity.ProductName;
                 product.Price = entity.Price;

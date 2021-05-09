@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Tarot.Model.Service;
 
 namespace Tarot.Web.Controllers
 {
@@ -10,21 +11,33 @@ namespace Tarot.Web.Controllers
     {
         public ActionResult Index()
         {
+            var product = new ProductService();
+            ViewBag.NewProducts = product.ListNewProduct(4);
+            ViewBag.HotProducts = product.ListHotProduct(4);
             return View();
         }
-
-        public ActionResult About()
+        [ChildActionOnly]
+        public PartialViewResult ProductCategory()
         {
-            ViewBag.Message = "Your application description page.";
+            var model = new ProductCategoryService().ListAllCategory();
+            return PartialView(model);
 
-            return View();
         }
 
-        public ActionResult Contact()
+        [ChildActionOnly]
+        public ActionResult KTTarot()
         {
-            ViewBag.Message = "Your contact page.";
+            var model = new NewCategoryService().ListByGroupID(1);
 
-            return View();
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult YNTarot()
+        {
+            var model = new NewCategoryService().ListByGroupID(2);
+
+            return PartialView(model);
         }
     }
 }

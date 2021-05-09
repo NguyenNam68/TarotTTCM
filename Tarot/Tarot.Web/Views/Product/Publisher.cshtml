@@ -1,0 +1,13 @@
+﻿@model List<Tarot.Model.EF.Publisher>
+<a class="list-group-item list-group-item-action" href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">
+    Nhà Xuất Bản <small class="text-muted">(100)</small>
+</a>
+<div class="collapse show" id="sub-men1" data-parent="#list-group-men">
+    <div class="list-group">
+        @foreach (var item in Model)
+        {
+            <a href="#" style="color:black" class="list-group-item list-group-item-action active">@item.Name<small class="text-muted">(50)</small></a>
+        }
+    </div>
+</div>
+

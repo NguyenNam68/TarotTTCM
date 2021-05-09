@@ -9,16 +9,12 @@
     [Table("ContentTag")]
     public partial class ContentTag
     {
-        [Display(Name ="Bài viết")]
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
+
+        [Display(Name = "Bài viết")]
         public int NewID { get; set; }
 
         [Display(Name = "Thẻ bài viết")]
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TagID { get; set; }
 
         [Display(Name = "Ngày tạo")]

@@ -1,0 +1,17 @@
+﻿@model List<Tarot.Model.EF.ProductCategory>
+<ul class="dropdown-menu megamenu-content" role="menu">
+    <li>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                var url = "/san-pham/" + item.ID;
+                <div class="col-menu col-md-3">
+                    <a href="@url" style="cursor:pointer;margin-bottom:13px">@item.CategoryName</a>
+                </div>
+            }
+            <!-- end col-3 -->
+        </div>
+        <!-- end row -->
+    </li>
+</ul>
+

@@ -19,6 +19,10 @@ namespace Tarot.Model.Service
         {
             return db.NewCategories.Find(id);
         }
+        public List<NewCategory> ListByGroupID(int newid)
+        {
+            return db.NewCategories.Where(x => x.NewID == newid).ToList();
+        }
         public bool ChangeStatus(int id)
         {
             var newcategory = db.NewCategories.Find(id);

@@ -1,0 +1,176 @@
+﻿@model Tarot.Model.EF.Product
+@{
+    var category = (Tarot.Model.EF.ProductCategory)ViewBag.Category;
+    var relatedProducts = (List<Tarot.Model.EF.Product>)ViewBag.RelatedProduct;
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Chi tiết sản phẩm</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">@category.CategoryName</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+<!-- Start Shop Detail  -->
+<div class="shop-detail-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-5 col-md-6">
+                        <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="@Model.Image" alt="First slide">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-7 col-md-6">
+                        <div class="single-product-details">
+                            <h1 style="font-size:30px">@Model.ProductName</h1>
+                            <h2>@String.Format("{0:n0}", @Model.Price)&nbsp;₫</h2>
+                            <p>Nhà sản xuất: @Model.PublisherID</p>
+                            <p>@Model.Description</p>
+                            <p>Danh mục: xxx</p>
+                            <div style="display:flex">
+                                <ul>
+                                    <li style="width:225px">
+                                        <div class="form-group quantity-box" style="display:flex">
+                                            <h4>Số lượng:</h4>
+                                            <input class="form-control" value="0" min="0" max="20" type="number" style="width: 64px;height:35px; margin-top: 13px; margin-left: 17px;">
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div class="price-box-bar" style="background-color:black;height:32px;margin-top:14px;margin-left: 46px;">
+                                    <div class="cart-and-bay-btn">
+                                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_tab_area">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Mô tả</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Đánh giá (0)</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <p style="margin-top:20px;word-spacing: 2px;">@Model.Detail</p>
+                        </div>
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <p>Đăng nhập để đọc đánh giá hoặc bình luận</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 sidebar right-sidebar">
+                <!-- main sidebar -->
+                <div class="pin-wrapper" style="height: 670px;">
+                    <div data-plugin-sticky="" data-plugin-options="{&quot;autoInit&quot;: true, &quot;minWidth&quot;: 991, &quot;containerSelector&quot;: &quot;.main-content-wrap&quot;,&quot;autoFit&quot;:true, &quot;paddingOffsetBottom&quot;: 10}" style="border-bottom: 0px none rgb(119, 119, 119); width: 265px;" class="sticky-active">
+                        <div class="sidebar-content">
+                            <div class="block">
+                                <div class="porto-block ">
+                                    <p></p><div class="vc_row wpb_row row">
+                                        <div class="vc_column_container col-md-12">
+                                            <div class="wpb_wrapper vc_column-inner">
+
+                                                <div class="feature-box feature-box-primary feature-box-style-2">
+                                                    <div class="feature-box-info">
+                                                        <h6 class="vc_custom_heading vc_custom_1560938686644 align-left">
+                                                            <a href="#" target=" _blank" style="font-size: 20px;">
+                                                                MIỄN PHÍ SHIP<br>
+                                                            </a>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-box feature-box-primary feature-box-style-2" style="margin-top:30px">
+                                                    <div class="feature-box-info">
+                                                        <h6 class="vc_custom_heading vc_custom_1560938529604 align-left">
+                                                            <a href="#" style="font-size: 20px;">
+                                                                TẶNG TÚI ĐỰNG
+                                                            </a>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-box feature-box-primary feature-box-style-2" style="margin-top:30px">
+                                                    <div class="feature-box-info">
+                                                        <h6 class="vc_custom_heading m-b-md vc_custom_1613703699895 align-left">
+                                                            <a href="#" target="_blank" style="font-size: 20px; margin-top:40px;">
+                                                                HỖ TRỢ 24/7
+                                                            </a>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="vc_row wpb_row row">
+                                    <div class="vc_column_container col-md-12">
+                                        <div class="wpb_wrapper vc_column-inner">
+                                            <div class="wpb_single_image wpb_content_element vc_align_left   mb-2">
+                                                <div class="wpb_wrapper">
+                                                    <a href="https://hoctarot.com" target="_self"><div class="vc_single_image-wrapper   vc_box_border_grey"><img style="width:265px; height:337px; " src="https://mystichouse.vn/wp-content/uploads/2016/06/456.png" class="vc_single_image-img attachment-full" alt="" srcset="https://mystichouse.vn/wp-content/uploads/2016/06/456.png 456w, https://mystichouse.vn/wp-content/uploads/2016/06/456-236x300.png 236w, https://mystichouse.vn/wp-content/uploads/2016/06/456-367x467.png 367w" sizes="(max-width: 456px) 100vw, 456px"></div></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-lg-12">
+            <div class="title-all text-center">
+                <h1 style="text-align:left">Có thể bạn cũng thích</h1>
+            </div>
+            <div class="featured-products-box owl-carousel owl-theme">
+                @foreach (var item in relatedProducts)
+                {
+                    var url = "/chi-tiet/" + item.ID;
+                    <div class="item">
+                        <div class="products-single fix">
+                            <div class="box-img-hover">
+                                <img src="@item.Image" class="img-fluid" alt="@item.ProductName">
+                                <div class="mask-icon" style="width:100%">
+                                    <ul>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="@item.ViewCount"><i class="fas fa-eye"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+                                    <a class="cart" href="#">Thêm vào giỏ</a>
+                                </div>
+                            </div>
+                            <div class="why-text" style="margin-left: 24px; width: 200px; text-align:center">
+                                <a href="@url"><h4 style="margin-left: 20px;">@item.ProductName</h4></a>
+                                <h5>@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- End Cart -->

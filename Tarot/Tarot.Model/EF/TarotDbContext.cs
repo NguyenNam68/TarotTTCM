@@ -93,6 +93,12 @@ namespace Tarot.Model.EF
                 .HasForeignKey(e => e.CategoryID)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<ProductCategory>()
+                .HasMany(e => e.ProductTypes)
+                .WithRequired(e => e.ProductCategory)
+                .HasForeignKey(e => e.CategoryID)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Product>()
                 .Property(e => e.PromotionPrice)
                 .HasPrecision(18, 0);
@@ -100,10 +106,6 @@ namespace Tarot.Model.EF
             modelBuilder.Entity<Product>()
                 .Property(e => e.Price)
                 .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Product>()
-                .Property(e => e.TopHot)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.CreatedBy)

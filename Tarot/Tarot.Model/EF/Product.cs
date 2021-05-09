@@ -16,7 +16,7 @@
 
         public int ID { get; set; }
 
-        [Display(Name = "Danh mục")]
+        [Display(Name ="Danh mục sản phẩm")]
         public int CategoryID { get; set; }
 
         [Display(Name = "Nhà xuất bản")]
@@ -45,11 +45,14 @@
         [Display(Name = "Giá")]
         public decimal? Price { get; set; }
 
-        [StringLength(50)]
-        public string TopHot { get; set; }
+        [Display(Name = "Top Hot")]
+        public bool TopHot { get; set; }
 
         [Display(Name = "Lượt xem")]
         public int? ViewCount { get; set; }
+
+        [Display(Name ="Lượt thích")]
+        public int? LikeCount { get; set; }
 
         [Display(Name = "Ngày tạo")]
         [Column(TypeName = "date")]

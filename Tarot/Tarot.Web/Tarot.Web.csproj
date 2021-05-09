@@ -174,6 +174,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FeedbackAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewCategoryAdminController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Areas\Admin\Controllers\PaymentAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductTagAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductTypeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublisherAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoreAdminController.cs" />
@@ -190,7 +192,9 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Encrytor.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,12 +226,15 @@
     <Content Include="Areas\Layout\images\apus.jpg" />
     <Content Include="Areas\Layout\images\mystichouse.png" />
     <Content Include="Areas\Layout\js\bootstrap-datetimepicker.js" />
+    <Content Include="Areas\Layout\js\controller\FeedbackController.js" />
     <Content Include="Areas\Layout\js\controller\NewCategoryController.js" />
     <Content Include="Areas\Layout\js\controller\NewController.js" />
     <Content Include="Areas\Layout\js\controller\OnlinePayingController.js" />
     <Content Include="Areas\Layout\js\controller\PaymentController.js" />
     <Content Include="Areas\Layout\js\controller\ProductCategoryController.js" />
     <Content Include="Areas\Layout\js\controller\ProductController.js" />
+    <Content Include="Areas\Layout\js\controller\ProductHot.js" />
+    <Content Include="Areas\Layout\js\controller\ProductTag.js" />
     <Content Include="Areas\Layout\js\controller\ProductTypeController.js" />
     <Content Include="Areas\Layout\js\controller\PublisherController.js" />
     <Content Include="Areas\Layout\js\controller\StoreController.js" />
@@ -1105,6 +1112,7 @@
     <Content Include="DataImage\ImageHome\Home\oracle-preview.jpg" />
     <Content Include="DataImage\ImageHome\Home\tarot-box.jpg" />
     <Content Include="DataImage\ImageHome\Home\tarot_preview.jpg" />
+    <Content Include="DataImage\ImageHome\Slide\backgroundApus.jpg" />
     <Content Include="DataImage\ImageHome\Slide\banner.jpg" />
     <Content Include="DataImage\ImageHome\Slide\home-banner.jpg" />
     <Content Include="DataImage\ImageHome\Slide\open-banner.jpg" />
@@ -1556,6 +1564,10 @@
     <Content Include="Assets\webfonts\fa-solid-900.ttf" />
     <Content Include="Assets\webfonts\fa-solid-900.woff" />
     <Content Include="Assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Admin\Views\ProductTagAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTagAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTagAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\FeedbackAdmin\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1580,6 +1592,15 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MENU.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Publisher.cshtml" />
+    <Content Include="Views\Home\KTTarot.cshtml" />
+    <Content Include="Views\Home\ProductCategory.cshtml" />
+    <Content Include="Views\Home\YNTarot.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\Feedback.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

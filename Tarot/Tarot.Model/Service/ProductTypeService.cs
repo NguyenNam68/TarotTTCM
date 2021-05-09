@@ -18,6 +18,10 @@ namespace Tarot.Model.Service
         public ProductType ViewDetail(int id)
         {
             return db.ProductTypes.Find(id);
+        }  
+        public List<ProductType> ListByCategoryGroup(int id)
+        {
+            return db.ProductTypes.Where(x => x.CategoryID == id && x.Status == true).ToList();
         }
         public IEnumerable<ProductType> DanhSachLSPPaging(string search, int page, int pageSize)
         {

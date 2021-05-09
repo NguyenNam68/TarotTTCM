@@ -1,0 +1,7 @@
+﻿@model List<Tarot.Model.EF.NewCategory>
+<ul class="dropdown-menu">
+    @foreach (var item in Model)
+    {
+        <li><a href="@item.ID">@item.Name</a></li>
+    }
+</ul>

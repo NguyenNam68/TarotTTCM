@@ -76,12 +76,14 @@
     <Compile Include="EF\TarotDbContext.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\FeedbackService.cs" />
     <Compile Include="Service\NewCategoryService.cs" />
     <Compile Include="Service\NewService.cs" />
     <Compile Include="Service\OnlinePayingService.cs" />
     <Compile Include="Service\PaymentService.cs" />
     <Compile Include="Service\ProductCategoryService.cs" />
     <Compile Include="Service\ProductService.cs" />
+    <Compile Include="Service\ProductTagService.cs" />
     <Compile Include="Service\ProductTypeService.cs" />
     <Compile Include="Service\PublisherService.cs" />
     <Compile Include="Service\StoreService.cs" />
@@ -95,6 +97,7 @@
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

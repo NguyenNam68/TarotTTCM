@@ -19,6 +19,9 @@
         [Display(Name = "Danh mục bài viết")]
         public string Name { get; set; }
 
+        [Display(Name = "Mã bài viết")]
+        public int? NewID { get; set; }
+
         [Display(Name = "Ngày tạo")]
         [Column(TypeName = "date")]
         public DateTime? CreatedDate { get; set; }

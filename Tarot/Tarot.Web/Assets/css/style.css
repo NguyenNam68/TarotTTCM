@@ -865,8 +865,11 @@ nav.navbar.bootsnav ul.nav li.active > a {
      text-transform: uppercase;
 }
  .why-text{
-     background: #f5f5f5;
-     padding: 15px;
+     background: #ffffff;
+     padding: 15px 0px 15px 0px;
+}
+.why-text>a h4:hover{
+    color:#00ff90;
 }
  .why-text h4{
      font-size: 16px;
@@ -880,12 +883,12 @@ nav.navbar.bootsnav ul.nav li.active > a {
      font-weight: 600;
 }
  .mask-icon{
-     width: 100%;
+     width: 234px;
      height: 100%;
      position: absolute;
      overflow: hidden;
      top: 0;
-     left: 0;
+     left: 0px;
 }
  .mask-icon ul{
      display: inline-block;
@@ -1320,7 +1323,7 @@ nav.navbar.bootsnav ul.nav li.active > a {
 }
 /*------------------------------------------------------------------ All Pages -------------------------------------------------------------------*/
  .all-title-box{
-     background: url("../images/all-bg-title.jpg") no-repeat center center;
+     background: url("../../DataImage/ImageHome/Slide/backgroundApus.jpg") no-repeat center center;
      -webkit-background-size: cover;
      -moz-background-size: cover;
      -ms-background-size: cover;
@@ -1602,20 +1605,7 @@ nav.navbar.bootsnav ul.nav li.active > a {
  .text-muted {
      padding: 10px 0px;
 }
- .list-group-item[data-toggle="collapse"]::after {
-     width: 0;
-     height: 0;
-     position: absolute;
-     top: calc(50% - 12px);
-     right: 10px;
-     content: '';
-     -webkit-transition: top .2s,-webkit-transform .2s;
-     transition: top .2s,-webkit-transform .2s;
-     transition: transform .2s,top .2s;
-     transition: transform .2s,top .2s,-webkit-transform .2s;
-     font-family: FontAwesome;
-     content: "\f105";
-}
+ 
  .list-group-tree .list-group-collapse .list-group {
      margin-left: 25px;
      border-left: 1px solid #ced4da;
@@ -1676,11 +1666,12 @@ nav.navbar.bootsnav ul.nav li.active > a {
  .price-box-slider p input{
      margin-top: 5px;
 }
- .price-box-slider p button{
-     border: none;
-     color: #ffffff;
-     float: right;
-}
+    .price-box-slider p button {
+        border: 1px solid #CCFFCC;
+        color: #010101;
+        background: #CCFFCC;
+        float: right;
+    }
  .brand-box {
      display: inline-block;
      width: 100%;
@@ -1727,11 +1718,11 @@ nav.navbar.bootsnav ul.nav li.active > a {
      padding-left: 15px;
 }
  .toolbar-sorter-right .btn-light{
-     background: #010101;
-     color: #ffffff;
+     background: #EEEEEE;
+     color: #010101;
 }
  .toolbar-sorter-right .btn-light:hover{
-     background: #0996e2;
+     background: #CCCCCC;
      border-radius: 0px;
      border: none;
 }
@@ -2297,14 +2288,11 @@ nav.navbar.bootsnav ul.nav li.active > a {
 }
  .single-product-details ul{
      display: inline-block;
-     width: 100%;
-     border: 1px #010101 dashed;
+     width: 30%;
      margin-bottom: 30px;
 }
  .single-product-details ul li{
-     width: 50%;
      float: left;
-     padding: 0px 15px;
 }
  .size-st .bootstrap-select > .dropdown-toggle.btn-light{
      background: #010101;
@@ -2319,7 +2307,7 @@ nav.navbar.bootsnav ul.nav li.active > a {
      margin-bottom: 30px;
 }
  .price-box-bar a{
-     padding: 10px 20px;
+     padding: 4px 6px;
      font-weight: 700;
      color: #ffffff;
      border: none;
@@ -2379,6 +2367,50 @@ nav.navbar.bootsnav ul.nav li.active > a {
      vertical-align: middle;
      white-space: nowrap;
 }
+.vc_custom_1489801878266 {
+    margin-bottom: 0px !important;
+}
+
+.vc_custom_1489801899317 {
+    margin-bottom: 0px !important;
+}
+
+.vc_custom_1560938686644 {
+    margin-bottom: 0px !important;
+    padding-left: 10px !important;
+}
+
+.vc_custom_1560938529604 {
+    padding-left: 10px !important;
+}
+
+.vc_custom_1613703699895 {
+    padding-left: 10px !important;
+}
+
+.sidebar div.wpb_single_image .vc_single_image-wrapper {
+    display: block;
+}
+.porto-icon-shipped:before {
+    content: '\e87a';
+}
+
+[class^="porto-icon-"]:before, [class*=" porto-icon-"]:before {
+    font-family: "porto";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    -webkit-font-smoothing: antialiased;
+
  
 
 

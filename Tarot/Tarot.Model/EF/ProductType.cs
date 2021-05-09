@@ -20,6 +20,9 @@
         [StringLength(500)]
         public string TypeName { get; set; }
 
+        [Display(Name = "Danh mục")]
+        public int CategoryID { get; set; }
+
         [Display(Name = "Ngày tạo")]
         [Column(TypeName = "date")]
         public DateTime? CreatedDate { get; set; }
@@ -30,6 +33,8 @@
 
         [Display(Name = "Tình trạng")]
         public bool Status { get; set; }
+
+        public virtual ProductCategory ProductCategory { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductTag> ProductTags { get; set; }

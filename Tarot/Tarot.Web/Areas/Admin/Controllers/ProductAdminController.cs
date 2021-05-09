@@ -19,7 +19,6 @@ namespace Tarot.Web.Areas.Admin.Controllers
             var model = service.DanhSachSPPaging(search,page, pageSize);
             ViewBag.Search = search;
 
-
             return View(model);
         }
         public void SetViewBagCategory(int? selectedCategoryID = null)
@@ -77,7 +76,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 var result = service.Update(product);
                 if (result)
                 {
-                    SetAlert("Thêm sản phẩm thành công!", "success");
+                    SetAlert("Cập nhật sản phẩm thành công!", "success");
                     return RedirectToAction("Index", "ProductAdmin");
                 }
                 else
@@ -102,6 +101,15 @@ namespace Tarot.Web.Areas.Admin.Controllers
             return Json(new
             {
                 status = result
+            });
+        }
+        [HttpPost]
+        public JsonResult ChangeHot(int id)
+        {
+            var result = new ProductService().ChangeHot(id);
+            return Json(new
+            {
+                hot = result
             });
         }
     }

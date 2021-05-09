@@ -19,6 +19,10 @@ namespace Tarot.Model.Service
         {
             return db.Publishers.Find(id);
         }
+        public List<Publisher> ListAllPublisher()
+        {
+            return db.Publishers.Where(x => x.Status == true).ToList();
+        }
         public IEnumerable<Publisher> DanhSachNXBPaging(string search,int page, int pageSize)
         {
             IQueryable<Publisher> model = db.Publishers;

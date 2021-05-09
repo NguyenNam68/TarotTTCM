@@ -42,7 +42,7 @@
         [Column(TypeName = "date")]
         public DateTime? CreatedDate { get; set; }
 
-        
+
         [StringLength(500)]
         public string CreatedBy { get; set; }
 

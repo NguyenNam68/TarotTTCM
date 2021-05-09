@@ -19,6 +19,10 @@ namespace Tarot.Model.Service
         {
             return db.Stores.Find(id);
         }
+        public List<Store> ListAllStore()
+        {
+            return db.Stores.Where(x => x.Status == true).ToList();
+        }
         public IEnumerable<Store> ListStorePaging(string search,int page, int pageSize)
         {
             IQueryable<Store> model = db.Stores;

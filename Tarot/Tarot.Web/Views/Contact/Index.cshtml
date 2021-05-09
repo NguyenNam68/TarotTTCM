@@ -1,0 +1,57 @@
+﻿@model List<Tarot.Model.EF.Store>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Liên Hệ Với Chúng Tôi</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                    <li class="breadcrumb-item active"> Liên Hệ </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+<!-- Start Contact Us  -->
+<div class="contact-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+                <div class="contact-info-left">
+                    <h2>Thông tin liên hệ</h2>
+                    @foreach (var item in Model)
+                    {
+                        <div>
+                            <p>@item.NameStore</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <p><i class="fas fa-map-marker-alt"></i>Địa Chỉ: @item.Address</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-phone-square"></i>Điện thoại: <a href="tel:@item.Phone"> @item.Phone</a></p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-envelope"></i>Giờ mở cửa: @item.TimeOpen</p>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+                <div class="contact-form-right">
+                    <h2>Phản Hồi Với Cửa Hàng</h2>
+                    <p>Mọi nhu cầu liên hệ về sản phẩm, dịch vụ của Tarot Mystery Shop, Quý khách vui lòng điền đầy đủ thông tin theo mẫu dưới đây. Chúng tôi sẽ tiếp nhận và phản hồi lại Quý khách trong vòng 24h. Xin chân thành cảm ơn!</p>
+                    @{Html.RenderAction("Feedback", "Contact");}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Cart -->

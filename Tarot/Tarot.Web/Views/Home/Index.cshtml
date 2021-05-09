@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var listNewProducts = (List<Tarot.Model.EF.Product>)ViewBag.NewProducts;
+    var listHotProducts = (List<Tarot.Model.EF.Product>)ViewBag.HotProducts;
 }
 <!-- Start Slider -->
 <div id="slides-shop" class="cover-slides">
@@ -77,28 +79,31 @@
             </div>
         </div>
         <div class="row special-list">
-            <div class="col-lg-3 col-md-6 special-grid best-seller">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">New</p>
+            @foreach (var item in listNewProducts)
+            {
+                var url = "/chi-tiet/" + item.ID;
+                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">New</p>
+                            </div>
+                            <img src="@item.Image" class="img-fluid" alt="Image" style="width:300px" />
+                            <div class="mask-icon" style="width:100%">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="@item.ViewCount"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm vào giỏ</a>
+                            </div>
                         </div>
-                        <img src="~/DataImage/ImageHome/Home/tarot_preview.jpg" class="img-fluid" alt="Image" />
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Mua hàng</a>
+                        <div class="why-text" style="margin-left: 24px; width: 200px;text-align:center ">
+                            <a href="@url"><h4 style="margin-left: 20px;">@item.ProductName</h4></a>
+                            <h5>@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
                         </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $7.79</h5>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
     <div class="container">
@@ -109,29 +114,32 @@
                 </div>
             </div>
         </div>
-        <div class="row special-list">
-            <div class="col-lg-3 col-md-6 special-grid best-seller">
-                <div class="products-single fix">
-                    <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">HOT</p>
+        <div class="row special-list" style="text-align:center">
+            @foreach (var item in listHotProducts)
+            {
+                var url = "/chi-tiet/" + item.ID;
+                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">HOT</p>
+                            </div>
+                            <a href=""><img src="@item.Image" class="img-fluid" alt="@item.ProductName" style="width:300px"/></a>
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="" data-toggle="tooltip" data-placement="right" title="@item.ViewCount"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="">Thêm vào giỏ</a>
+                            </div>
                         </div>
-                        <img src="~/DataImage/ImageHome/Home/tarot_preview.jpg" class="img-fluid" alt="Image" />
-                        <div class="mask-icon">
-                            <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                            <a class="cart" href="#">Mua hàng</a>
+                        <div class="why-text" style="margin-left: 24px; width: 200px;">
+                            <a href="@url"><h4 style="margin-left:20px">@item.ProductName</h4></a>
+                            <h5>@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
                         </div>
-                    </div>
-                    <div class="why-text">
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <h5> $7.79</h5>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>

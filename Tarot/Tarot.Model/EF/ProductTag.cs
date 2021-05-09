@@ -8,16 +8,12 @@
 
     public partial class ProductTag
     {
+        public int ID { get; set; }
+
         [Display(Name = "Sản phẩm")]
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProductID { get; set; }
 
         [Display(Name = "Loại sản phẩm")]
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TypeID { get; set; }
 
         [Display(Name = "Thẻ sản phẩm")]
