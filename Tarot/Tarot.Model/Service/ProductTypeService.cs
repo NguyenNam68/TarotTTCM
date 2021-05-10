@@ -19,9 +19,9 @@ namespace Tarot.Model.Service
         {
             return db.ProductTypes.Find(id);
         }  
-        public List<ProductType> ListByCategoryGroup(int id)
+        public List<ProductType> ListType()
         {
-            return db.ProductTypes.Where(x => x.CategoryID == id && x.Status == true).ToList();
+            return db.ProductTypes.Where(x=> x.Status == true).ToList();
         }
         public IEnumerable<ProductType> DanhSachLSPPaging(string search, int page, int pageSize)
         {

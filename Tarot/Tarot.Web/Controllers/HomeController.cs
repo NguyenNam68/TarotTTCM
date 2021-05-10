@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tarot.Model.Service;
+using Tarot.Web.Models;
 
 namespace Tarot.Web.Controllers
 {
@@ -15,6 +16,18 @@ namespace Tarot.Web.Controllers
             ViewBag.NewProducts = product.ListNewProduct(4);
             ViewBag.HotProducts = product.ListHotProduct(4);
             return View();
+        }
+        [ChildActionOnly]
+        public PartialViewResult HeaderCart()
+        {
+            var cart = Session[Common.CommonConstants.CartSession];
+            var list = new List<Cart>();
+            if (cart != null)
+            {
+                list = (List<Cart>)cart;
+            }
+            return PartialView(list);
+
         }
         [ChildActionOnly]
         public PartialViewResult ProductCategory()

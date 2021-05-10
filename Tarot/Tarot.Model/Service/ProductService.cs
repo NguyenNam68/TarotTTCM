@@ -27,6 +27,13 @@ namespace Tarot.Model.Service
         {
             return db.Products.Find(id);
         }
+        public List<Product> ListProduct(ref int totalRecord, int pageIndex, int pageSize)
+        {
+            totalRecord = db.Products.Where(x => x.Status == true).Count();
+            var model=db.Products.Where(x => x.Status == true).
+                OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return model;
+        }
         public List<Product> ListNewProduct(int top)
         {
             return db.Products.Where(x=>x.Status==true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
@@ -40,9 +47,12 @@ namespace Tarot.Model.Service
             var product = db.Products.Find(productID);
             return db.Products.Where(x => x.ID != productID &&x.CategoryID==product.CategoryID &&x.Status == true).ToList();
         }
-        public List<Product> ListByCategoryID(int categoryID)
+        public List<Product> ListByCategoryID(int categoryID, ref int totalRecord, int pageIndex, int pageSize)
         {
-            return db.Products.Where(x => x.CategoryID == categoryID && x.Status == true).OrderByDescending(x=>x.CreatedDate).ToList();
+            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
+            var model= db.Products.Where(x => x.CategoryID == categoryID && x.Status == true).
+                OrderByDescending(x=>x.CreatedDate).Skip((pageIndex-1)*pageSize).Take(pageSize).ToList();
+            return model;
         }
         public bool ChangeStatus(int id)
         {

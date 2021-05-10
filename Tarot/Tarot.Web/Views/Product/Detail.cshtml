@@ -48,14 +48,14 @@
                                     <li style="width:225px">
                                         <div class="form-group quantity-box" style="display:flex">
                                             <h4>Số lượng:</h4>
-                                            <input class="form-control" value="0" min="0" max="20" type="number" style="width: 64px;height:35px; margin-top: 13px; margin-left: 17px;">
+                                            <input class="form-control" value="" min="1" max="20" type="number" style="width: 64px;height:35px; margin-top: 13px; margin-left: 17px;">
                                         </div>
                                     </li>
                                 </ul>
 
                                 <div class="price-box-bar" style="background-color:black;height:32px;margin-top:14px;margin-left: 46px;">
                                     <div class="cart-and-bay-btn">
-                                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Thêm vào giỏ</a>
+                                        <a class="btn hvr-hover" data-fancybox-close="" href="/them-gio-hang?productID=@Model.ID&quantity=1">Thêm vào giỏ</a>
                                     </div>
                                 </div>
                             </div>
@@ -155,14 +155,14 @@
                                 <div class="mask-icon" style="width:100%">
                                     <ul>
                                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="@item.ViewCount"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào yêu thích"><i class="far fa-heart"></i></a></li>
                                     </ul>
                                     <a class="cart" href="#">Thêm vào giỏ</a>
                                 </div>
                             </div>
                             <div class="why-text" style="margin-left: 24px; width: 200px; text-align:center">
-                                <a href="@url"><h4 style="margin-left: 20px;">@item.ProductName</h4></a>
-                                <h5>@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
+                                <a href="@url"><h4 style="margin-left: 45px;">@item.ProductName</h4></a>
+                                <h5 style="text-align:center">@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
                             </div>
                         </div>
 

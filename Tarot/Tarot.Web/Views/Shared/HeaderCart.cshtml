@@ -1,0 +1,30 @@
+﻿@model List<Tarot.Web.Models.Cart>
+<div class="side" style="background-color:turquoise;width:290px;margin-top:50px">
+    <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+    @if (Model.Count > 0)
+    {
+        <ul>
+            <li class="cart-box">
+                <ul class="cart-list">
+
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <a href="#" class="photo"><img src="@item.product.Image" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">@item.product.ProductName</a></h6>
+                            <p>1x - <span class="price">@item.product.Price</span></p>
+                        </li>
+                    }
+                    <li class="total" style="display:flex">
+                        <a href="#" class="btn btn-default hvr-hover btn-cart" style="color:black;background-color:turquoise">VIEW CART</a>
+                        <span class="float-right"><strong>Total</strong>: $180.00</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <span>Không có sản phẩm nào trong giỏ hàng </span>
+    }
+    </div>

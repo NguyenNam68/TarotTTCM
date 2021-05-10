@@ -1,5 +1,8 @@
 ﻿@model List<Tarot.Model.EF.Product>
 @{
+    var type = (List<Tarot.Model.EF.ProductType>)ViewBag.Type;
+    var category = (List<Tarot.Model.EF.ProductCategory>)ViewBag.Category;
+    var prcategory = (Tarot.Model.EF.ProductCategory)ViewBag.PrCategory;
     ViewBag.Title = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -41,22 +44,28 @@
                             <div class="list-group-collapse sub-men">
                                 @{Html.RenderAction("Publisher", "Product"); }
                             </div>
-                            <a href="#" class="list-group-item list-group-item-action">Sản phẩm mới<small class="text-muted"></small></a>
-                            <div class="list-group-collapse sub-men">
-                                <a class="list-group-item list-group-item-action" href="#sub-men2" data-toggle="collapse" aria-expanded="false" aria-controls="sub-men2">
-                                    Footwear
-                                    <small class="text-muted">(50)</small>
-                                </a>
-                                <div class="collapse" id="sub-men2" data-parent="#list-group-men">
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action">Sports Shoes <small class="text-muted">(10)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Sneakers <small class="text-muted">(20)</small></a>
-                                        <a href="#" class="list-group-item list-group-item-action">Formal Shoes <small class="text-muted">(20)</small></a>
+                            @foreach (var cateitem in category)
+                            {
+                                var child = type.Where(x => x.CategoryID == cateitem.ID);
+                                var parentClass = child.Count() > 0 ? "class=collapse data-parent=#list-group-men" : "";
+                                <div class="list-group-collapse sub-men">
+                                    <a class="list-group-item list-group-item-action" href="#@cateitem.ID" data-toggle="collapse" aria-expanded="true" aria-controls="@cateitem.ID">
+                                        @cateitem.CategoryName
+                                        <small class="text-muted">(50)</small>
+                                    </a>
+                                    <div @parentClass id=@cateitem.ID>
+                                        @if (child.Count() > 0)
+                                        {
+                                            <div class="list-group">
+                                                @foreach (var childitem in child)
+                                                {
+                                                    <a href="#" style="color:black" class="list-group-item list-group-item-action">@childitem.TypeName<small class="text-muted">(10)</small></a>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                 </div>
-                            </div>
-                            <a href="#" class="list-group-item list-group-item-action">Accessories <small class="text-muted">(11)</small></a>
-                            <a href="#" class="list-group-item list-group-item-action">Bags <small class="text-muted">(22)</small></a>
+                            }
                         </div>
                     </div>
                     <div class="filter-price-left">
@@ -103,128 +112,68 @@
                                                     <div class="mask-icon">
                                                         <ul>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="@item.ViewCount"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào yêu thích"><i class="far fa-heart"></i></a></li>
                                                         </ul>
-                                                        <a class="cart" href="#">Thêm vào giỏ</a>
+                                                        <a class="cart" href="/them-gio-hang?productID=@item.ID&quantity=1">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                                 <div class="why-text" style="margin-left: 24px; width: 200px;">
                                                     <a href="@url"><h4 style="margin-left:20px">@item.ProductName</h4></a>
-                                                    <h5>@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
+                                                    <h5 style="text-align:center">@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
                                                 </div>
                                             </div>
                                         </div>
                                     }
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="list-view">
-                                <div class="list-view-box">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="new">New</p>
-                                                    </div>
-                                                    <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
-                                            <div class="why-text full-width">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> <del>$ 60.00</del> $40.79</h5>
-                                                <p>
-                                                    Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante. Integer vitae suscipit nisi. Morbi dignissim risus sit amet orci porta, eget aliquam purus
-                                                    sollicitudin. Cras eu metus felis. Sed arcu arcu, sagittis in blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus, quis euismod ex volutpat in. Vestibulum eleifend eros ac lobortis aliquet.
-                                                    Suspendisse at ipsum vel lacus vehicula blandit et sollicitudin quam. Praesent vulputate semper libero pulvinar consequat. Etiam ut placerat lectus.
-                                                </p>
-                                                <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-view-box">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
-                                            <div class="why-text full-width">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> <del>$ 60.00</del> $40.79</h5>
-                                                <p>
-                                                    Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante. Integer vitae suscipit nisi. Morbi dignissim risus sit amet orci porta, eget aliquam purus
-                                                    sollicitudin. Cras eu metus felis. Sed arcu arcu, sagittis in blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus, quis euismod ex volutpat in. Vestibulum eleifend eros ac lobortis aliquet.
-                                                    Suspendisse at ipsum vel lacus vehicula blandit et sollicitudin quam. Praesent vulputate semper libero pulvinar consequat. Etiam ut placerat lectus.
-                                                </p>
-                                                <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-view-box">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                    </div>
-                                                    <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                        </ul>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
-                                            <div class="why-text full-width">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> <del>$ 60.00</del> $40.79</h5>
-                                                <p>
-                                                    Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante. Integer vitae suscipit nisi. Morbi dignissim risus sit amet orci porta, eget aliquam purus
-                                                    sollicitudin. Cras eu metus felis. Sed arcu arcu, sagittis in blandit eu, imperdiet sit amet eros. Donec accumsan nisi purus, quis euismod ex volutpat in. Vestibulum eleifend eros ac lobortis aliquet.
-                                                    Suspendisse at ipsum vel lacus vehicula blandit et sollicitudin quam. Praesent vulputate semper libero pulvinar consequat. Etiam ut placerat lectus.
-                                                </p>
-                                                <a class="btn hvr-hover" href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                 </div>
+                <!--Phân Trang-->
+                @if(ViewBag.TotalPage>1)
+                {
+                    var pageDisplay = (int)(ViewBag.MaxPage);
+                    int totalPage = (int)ViewBag.TotalPage;
+                    int currentPage = ((int)ViewBag.Page);
+
+                    var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                    var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                    var link = "/san-pham/" + prcategory.ID;
+            <div class="middle_list" style="margin-left:110px">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @if (currentPage > ViewBag.First)
+                        {
+                            <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li><a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a></li>
+                        }
+                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                        {
+                            if (currentPage == i)
+                            {
+                                <li><a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                            }
+                        }
+                        @if (currentPage < totalPage)
+                        {
+                            <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                            <li><a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                        }
+                    </ul>
+                    </nav>
+
+            </div>
+                }
+                else
+                {
+                <span>Không Có Sản Phẩm Nào</span>
+            }
             </div>
         </div>
     </div>

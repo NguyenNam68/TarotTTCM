@@ -26,7 +26,6 @@
 @import url(bootsnav.css);
 @import url(owl.carousel.min.css);
 @import url(jquery-ui.css);
-@import url(nice-select.css);
 @import url(baguetteBox.min.css);
 
 /*------------------------------------------------------------------
@@ -542,18 +541,6 @@ nav.navbar.bootsnav ul.nav li.active > a {
      nav.navbar.navbar-inverse.navbar-mobile ul.nav{
          border-top: solid 1px #222;
     }
-}
- .arrow::before{
-     font-family: 'FontAwesome';
-     content: "\f0d7";
-     margin-left: 5px;
-     margin-top: 2px;
-     border: none;
-     display: inline-block;
-     vertical-align: inherit;
-     position: absolute;
-     right: 10px;
-     top: 28px;
 }
  .dropdown-toggle::after{
      display: none;
@@ -2410,6 +2397,44 @@ nav.navbar.bootsnav ul.nav li.active > a {
     line-height: 1em;
     margin-left: .2em;
     -webkit-font-smoothing: antialiased;
+}
+    .middle_list
+
+{
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
+.middle_list .pagination {
+    margin-bottom: 0px;
+    border: none;
+}
+
+    .middle_list .pagination li {
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+        .middle_list .pagination li a {
+            border: none;
+            border: 1px solid #e1e1e1;
+            border-radius: 3px;
+            font-size: 14px;
+            font-family: "Open Sans", sans-serif;
+            color: #797979;
+            line-height: 44px;
+            padding: 0px 18px;
+            -webkit-transition: all 400ms linear 0s;
+            -o-transition: all 400ms linear 0s;
+            transition: all 400ms linear 0s;
+        }
+
+        .middle_list .pagination li:hover a, .middle_list .pagination li.active a {
+            background: #f195b2;
+            color: #fff;
+            border-color: #f195b2;
+        }
 
  
 

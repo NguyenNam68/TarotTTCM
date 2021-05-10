@@ -17,6 +17,8 @@ namespace Tarot.Model.EF
         public virtual DbSet<NewCategory> NewCategories { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<OnlinePaying> OnlinePayings { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -72,6 +74,18 @@ namespace Tarot.Model.EF
             modelBuilder.Entity<OnlinePaying>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.CustomerID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.ShipMobile)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<PaymentMethod>()
                 .Property(e => e.CreatedBy)

@@ -1,0 +1,160 @@
+﻿@model List<Tarot.Web.Models.Cart>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="/Assets/Client/CartController.js"></script>
+}
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Giỏ Hàng Của Bạn</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Giỏ hàng</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+<!-- Start Cart  -->
+<div class="cart-box-main">
+    <div class="container">
+        @if (Model.Count > 0)
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Hình ảnh</th>
+                                    <th>Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    var url = "chi-tiet" + item.product.ID;
+                                    <tr>
+                                        <td class="thumbnail-img">
+                                            <a href="#">
+                                                <img class="img-fluid" src="@item.product.Image" alt="" />
+                                            </a>
+                                        </td>
+                                        <td>@item.product.ID</td>
+                                        <td class="name-pr">
+                                            <a href="@url">
+                                                @item.product.ProductName
+
+                                            </a>
+                                        </td>
+
+                                        <td class="price-pr">
+                                            <p>@String.Format("{0:n0}", @item.product.Price.GetValueOrDefault(0))&nbsp;₫</p>
+                                        </td>
+                                        <td class="quantity-box">
+                                            <input type="number" size="4"  class="txtQuantity" data-id="@item.product.ID" value="@item.Quantity" min="0" step="1" style="width:26%">
+                                        </td>
+                                        <td class="total-pr">
+                                            <p>@String.Format("{0:n0}", item.product.Price.GetValueOrDefault(0) * item.Quantity)&nbsp;₫</p>
+                                        </td>
+                                        <td class="remove-pr">
+                                            <a href="#" data-id="@item.product.ID" class="btn-delete">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col-lg-4 col-sm-4">
+                    <div class="coupon-box">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" placeholder="Nhập mã giảm giá" aria-label="Coupon code" type="text">
+                            <div class="input-group-append">
+                                <button id="btnAddCode" class="btn btn-theme" type="button">Thêm mã giảm giá</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-3" style="margin-left:59px">
+                    <div class="coupon-box">
+                        <div class="input-group input-group-sm">
+                            <div class="update-box">
+                                <div class="input-group-append">
+                                    <button id="btnUpdate" class="btn btn-theme" style="height:50px">Cập nhật lại giỏ hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-3">
+                    <div class="coupon-box">
+                        <div class="input-group input-group-sm">
+                            <div class="update-box">
+                                <div class="input-group-append">
+                                    <button id="btnContinue" class="btn btn-theme" style="height:50px">Tiếp tục mua hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-5">
+                <div class="col-lg-8 col-sm-12"></div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="order-box">
+                        <h3>Giá tiền đơn hàng</h3>
+                        <div class="d-flex">
+                            <h4>Tổng tiền</h4>
+                            <div class="ml-auto font-weight-bold"> $ 130 </div>
+                        </div>
+                        <div class="d-flex">
+                            <h4>Giảm giá</h4>
+                            <div class="ml-auto font-weight-bold"> $ 20 </div>
+                        </div>
+                        <hr class="my-1">
+                        <div class="d-flex">
+                            <h4>Mã giảm giá</h4>
+                            <div class="ml-auto font-weight-bold"> $ 10 </div>
+                        </div>
+                        <div class="d-flex">
+                            <h4>Phí vận chuyển</h4>
+                            <div class="ml-auto font-weight-bold"> Free </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex gr-total">
+                            <h5>Thành tiền</h5>
+                            <div class="ml-auto h5"> $ 388 </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div style="background-color:#00ff90;width:130px;margin-left:1000px">
+                    <button class="ml-auto btn hvr-hover" id="btnPayment">Thanh Toán</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng của bạn</span>
+        }
+
+    </div>
+</div>
+<!-- End Cart -->

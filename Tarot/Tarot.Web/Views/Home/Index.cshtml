@@ -92,9 +92,9 @@
                             <div class="mask-icon" style="width:100%">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="@item.ViewCount"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#">Thêm vào giỏ</a>
+                                <a class="cart" href="/them-gio-hang?productID=@item.ID&quantity=1">Thêm vào giỏ</a>
                             </div>
                         </div>
                         <div class="why-text" style="margin-left: 24px; width: 200px;text-align:center ">
@@ -128,14 +128,14 @@
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="" data-toggle="tooltip" data-placement="right" title="@item.ViewCount"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    <li><a href="" data-toggle="tooltip" data-placement="right" title="Thêm vào yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="">Thêm vào giỏ</a>
+                                <a class="cart" href="/them-gio-hang?productID=@item.ID&quantity=1">Thêm vào giỏ</a>
                             </div>
                         </div>
                         <div class="why-text" style="margin-left: 24px; width: 200px;">
                             <a href="@url"><h4 style="margin-left:20px">@item.ProductName</h4></a>
-                            <h5>@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
+                            <h5 style="text-align:center">@String.Format("{0:n0}", @item.Price)&nbsp;₫</h5>
                         </div>
                     </div>
                 </div>

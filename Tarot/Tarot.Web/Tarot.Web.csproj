@@ -192,12 +192,14 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Encrytor.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1067,6 +1069,7 @@
     <Content Include="Areas\Layout\vendor\vector-map\jqvmap.min.css" />
     <Content Include="Areas\Layout\vendor\wow\animate.css" />
     <Content Include="Areas\Layout\vendor\wow\wow.min.js" />
+    <Content Include="Assets\Client\CartController.js" />
     <Content Include="Assets\css\all.css" />
     <Content Include="Assets\css\baguetteBox.min.css" />
     <Content Include="Assets\css\bootsnav.css" />
@@ -1601,6 +1604,8 @@
     <Content Include="Views\Contact\Feedback.cshtml" />
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Shared\HeaderCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

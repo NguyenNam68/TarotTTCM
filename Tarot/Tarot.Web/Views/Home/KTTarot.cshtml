@@ -2,6 +2,7 @@
 <ul class="dropdown-menu">
     @foreach (var item in Model)
     {
-        <li><a href="@item.ID">@item.Name</a></li>
+        var url = "/kt-tarot/" + item.ID;
+        <li><a href="@url">@item.Name</a></li>
     }
 </ul>

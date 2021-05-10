@@ -16,7 +16,7 @@
 
         public int ID { get; set; }
 
-        [Display(Name ="Danh mục sản phẩm")]
+        [Display(Name = "Danh mục sản phẩm")]
         public int CategoryID { get; set; }
 
         [Display(Name = "Nhà xuất bản")]
@@ -51,7 +51,7 @@
         [Display(Name = "Lượt xem")]
         public int? ViewCount { get; set; }
 
-        [Display(Name ="Lượt thích")]
+        [Display(Name = "Lượt thích")]
         public int? LikeCount { get; set; }
 
         [Display(Name = "Ngày tạo")]
@@ -64,6 +64,7 @@
 
         [Display(Name = "Tình trạng")]
         public bool Status { get; set; }
+
 
         public virtual ProductCategory ProductCategory { get; set; }
 
