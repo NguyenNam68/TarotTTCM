@@ -82,6 +82,8 @@
     <Compile Include="Service\NewCategoryService.cs" />
     <Compile Include="Service\NewService.cs" />
     <Compile Include="Service\OnlinePayingService.cs" />
+    <Compile Include="Service\OrderDetailService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PaymentService.cs" />
     <Compile Include="Service\ProductCategoryService.cs" />
     <Compile Include="Service\ProductService.cs" />

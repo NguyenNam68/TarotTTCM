@@ -64,12 +64,28 @@
                     <div class="right-phone-box">
                         <p>LIÊN HỆ : <a href="#">0988 666 888</a></p>
                     </div>
-                    <div class="our-link">
-                        <ul>
-                            <li><a href="#">Đăng Ký</a></li>
-                            <li><a href="#">Đăng Nhập</a></li>
-                        </ul>
+                    @{
+                        var session =(Tarot.Web.Common.UserLogin)Session[Tarot.Web.Common.CommonConstants.USER_SESSION];
+                    }
+                    @if (session == null)
+                    {
+                        <div class="our-link">
+                            <ul>
+                                <li><a href="@Url.Action("Register","User")">Đăng Ký</a></li>
+                                <li><a href="@Url.Action("Login","User")">Đăng Nhập</a></li>
+                            </ul>
+                        </div>
+                    }
+                   else
+                    {
+                     <div class="our-link">
+                           <ul style="color:white">
+                                 <li><a>Xin chào: @session.UserName</a></li>
+                                 <li>@Html.ActionLink("Đăng xuất","LogOut","User")</li>
+                            </ul>
+
                     </div>
+                    }
                 </div>
             </div>
         </div>

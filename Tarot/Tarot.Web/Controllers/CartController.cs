@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Tarot.Model.EF;
 using Tarot.Model.Service;
 using Tarot.Web.Models;
 
@@ -92,6 +93,52 @@ namespace Tarot.Web.Controllers
             {
                 status = true
             });
+        }
+        public ActionResult Payment()
+        {
+            var cart = Session[CartSession];
+            var list = new List<Cart>();
+            if (cart != null)
+            {
+                list = (List<Cart>)cart;
+            }
+            return View(list);
+        }
+        [HttpPost]
+        public ActionResult Payment(string shipName, string email, string address, string mobile)
+        {
+            var order = new Order();
+            order.CreatedDate = DateTime.Now;
+            order.ShipAddress = address;
+            order.ShipEmail = email;
+            order.ShipMobile = mobile;
+            order.ShipName = mobile;
+            order.Status = false;
+
+            try
+            {
+                var id = new OrderService().Insert(order);
+                var orderdt = new OrderDetailService();
+                var cart = (List<Cart>)Session[CartSession];
+                foreach (var item in cart)
+                {
+                    var orderDetail = new OrderDetail();
+                    orderDetail.OrderID = id;
+                    orderDetail.ProductID = item.product.ID;
+                    orderDetail.Quantity = item.Quantity;
+                    orderDetail.Price = item.product.Price;
+                    orderdt.Insert(orderDetail);
+                }
+            }
+            catch(Exception)
+            {
+                return Redirect("/loi-thanhtoan");
+            }
+            return Redirect("/hoan-thanh/");
+        }
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }
