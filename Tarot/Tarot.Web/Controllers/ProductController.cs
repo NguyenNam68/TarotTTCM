@@ -10,59 +10,46 @@ namespace Tarot.Web.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index(int page = 1, int pageSize = 9)
+        public ActionResult Index()
         {
             var productcategory = new ProductCategoryService().ListAllCategory();
             ViewBag.Type = new ProductTypeService().ListType();
-            int totalRecord = 0;
-            ViewBag.Product = new ProductService().ListProduct(ref totalRecord, page, pageSize);
-
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
-
-            int maxPage = 8;
-            int totalPage = 0;
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
-
-            ViewBag.TotalPage = totalPage;
-            ViewBag.MaxPage = maxPage;
-            ViewBag.First = 1;
-            ViewBag.Last = totalPage;
-            ViewBag.Next = page + 1;
-            ViewBag.Prev = page - 1;
+            ViewBag.Product = new ProductService().ListProduct();
+            ViewBag.Publisher = new PublisherService().ListAllPublisher();
 
             return View(productcategory);
         }
-        [ChildActionOnly]
-        public PartialViewResult Publisher()
+        public ActionResult Publisher(int publisherid)
         {
-            var model = new PublisherService().ListAllPublisher();
-            return PartialView(model);
+            ViewBag.PrCategory = new ProductCategoryService().ViewDetail(publisherid);
+            ViewBag.Type = new ProductTypeService().ListType();
+            ViewBag.Category = new ProductCategoryService().ListAllCategory();
+            ViewBag.Publisher = new PublisherService().ListAllPublisher();
+
+            var model = new ProductService().ListByPublisherID(publisherid);
+            return View(model);
 
         }
-        public ActionResult Category(int categoryid, int page=1, int pageSize=9)
+        public ActionResult Category(int categoryid)
         {
             ViewBag.PrCategory = new ProductCategoryService().ViewDetail(categoryid);
             ViewBag.Type = new ProductTypeService().ListType();
             ViewBag.Category = new ProductCategoryService().ListAllCategory();
+            ViewBag.Publisher = new PublisherService().ListAllPublisher();
 
-            int totalRecord = 0;
-            var model = new ProductService().ListByCategoryID(categoryid, ref totalRecord, page, pageSize);
+            var model = new ProductService().ListByCategoryID(categoryid);
+            return View(model);
+        }
 
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
+        public ActionResult Type(int typeid)
+        {
+            ViewBag.PrType = new ProductTypeService().ViewDetail(typeid);
+            ViewBag.Type = new ProductTypeService().ListType();
+            ViewBag.Category = new ProductCategoryService().ListAllCategory();
+            ViewBag.Publisher = new PublisherService().ListAllPublisher();
 
-            int maxPage = 8;
-            int totalPage = 0;
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            var model = new ProductService().ListByTypeID(typeid);
 
-            ViewBag.TotalPage = totalPage;
-            ViewBag.MaxPage = maxPage;
-            ViewBag.First = 1;
-            ViewBag.Last = totalPage;
-            ViewBag.Next = page + 1;
-            ViewBag.Prev = page - 1;
-            
             return View(model);
         }
 
@@ -70,6 +57,7 @@ namespace Tarot.Web.Controllers
         public ActionResult Detail(int productid)
         {
             var product = new ProductService().ViewDetail(productid);
+            ViewBag.Tags = new ProductTagService().ListTagByID(productid);
             ViewBag.Category = new ProductCategoryService().ViewDetail(product.CategoryID);
             ViewBag.RelatedProduct = new ProductService().ListRelatedProduct(productid);
             return View(product);

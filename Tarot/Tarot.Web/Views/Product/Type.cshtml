@@ -1,10 +1,10 @@
-﻿@model List<Tarot.Model.EF.Product>
+﻿@model List<Tarot.Model.ViewModel.ProductTypeViewModel>
 @{
     var type = (List<Tarot.Model.EF.ProductType>)ViewBag.Type;
     var category = (List<Tarot.Model.EF.ProductCategory>)ViewBag.Category;
-    var prcategory = (Tarot.Model.EF.ProductCategory)ViewBag.PrCategory;
+    var prtype = (Tarot.Model.EF.ProductType)ViewBag.PrType;
     var publisher = (List<Tarot.Model.EF.Publisher>)ViewBag.Publisher;
-    ViewBag.Title = "Publisher";
+    ViewBag.Title = "Type";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- Start All Title Box -->
@@ -15,8 +15,7 @@
                 <h2>Sản Phẩm</h2>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
-                    <li class="breadcrumb-item">Sản phẩm</li>
-                    <li class="breadcrumb-item active">Nhà xuất bản</li>
+                    <li class="breadcrumb-item active">Sản phẩm</li>
                 </ul>
             </div>
         </div>
@@ -72,7 +71,8 @@
                                             <div class="list-group">
                                                 @foreach (var childitem in child)
                                                 {
-                                                    <a href="/loai-sp/@childitem.ID" style="color:black" class="list-group-item list-group-item-action">@childitem.TypeName<small class="text-muted">(10)</small></a>
+                                                    var linktype = "/loai-sp/" + childitem.ID;
+                                                    <a href="@linktype" style="color:black" class="list-group-item list-group-item-action">@childitem.TypeName<small class="text-muted">(10)</small></a>
                                                 }
                                             </div>
                                         }
@@ -143,10 +143,9 @@
                     </div>
 
                 </div>
-                <!--Phân Trang-->
 
             </div>
         </div>
     </div>
 </div>
-<!-- End Shop Page -->
+

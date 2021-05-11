@@ -1597,7 +1597,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MENU.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Product\Publisher.cshtml" />
     <Content Include="Views\Home\KTTarot.cshtml" />
     <Content Include="Views\Home\ProductCategory.cshtml" />
     <Content Include="Views\Home\YNTarot.cshtml" />
@@ -1611,6 +1610,8 @@
     <Content Include="Views\Cart\Success.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Product\Type.cshtml" />
+    <Content Include="Views\Product\Publisher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

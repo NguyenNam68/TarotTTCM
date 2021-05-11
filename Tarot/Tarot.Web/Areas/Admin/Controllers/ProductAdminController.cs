@@ -23,12 +23,12 @@ namespace Tarot.Web.Areas.Admin.Controllers
         }
         public void SetViewBagCategory(int? selectedCategoryID = null)
         {
-            var service = new ProductService();
+            var service = new ProductCategoryService();
             ViewBag.CategoryID = new SelectList(service.ListAllCategory(), "ID", "CategoryName", selectedCategoryID);
         }
         public void SetViewBagPublisher(int? selectedPublisherID = null)
         {
-            var service = new ProductService();
+            var service = new PublisherService();
             ViewBag.PublisherID = new SelectList(service.ListAllPublisher(), "ID", "Name", selectedPublisherID);
         }
         [HttpGet]

@@ -3,6 +3,7 @@
     var type = (List<Tarot.Model.EF.ProductType>)ViewBag.Type;
     var category = (List<Tarot.Model.EF.ProductCategory>)ViewBag.Category;
     var prcategory = (Tarot.Model.EF.ProductCategory)ViewBag.PrCategory;
+    var publisher = (List<Tarot.Model.EF.Publisher>)ViewBag.Publisher;
     ViewBag.Title = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -42,7 +43,18 @@
                         </div>
                         <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
                             <div class="list-group-collapse sub-men">
-                                @{Html.RenderAction("Publisher", "Product"); }
+                                <a class="list-group-item list-group-item-action" href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">
+                                    Nhà Xuất Bản <small class="text-muted">(100)</small>
+                                </a>
+                                <div class="collapse" id="sub-men1" data-parent="#list-group-men">
+                                    <div class="list-group">
+                                        @foreach (var item in publisher)
+                                        {
+                                            var url = "/sanpham-nxb/" + item.ID;
+                                            <a href="@url" style="color:black" class="list-group-item list-group-item-action active">@item.Name<small class="text-muted">(50)</small></a>
+                                        }
+                                    </div>
+                                </div>
                             </div>
                             @foreach (var cateitem in category)
                             {
@@ -59,7 +71,7 @@
                                             <div class="list-group">
                                                 @foreach (var childitem in child)
                                                 {
-                                                    <a href="#" style="color:black" class="list-group-item list-group-item-action">@childitem.TypeName<small class="text-muted">(10)</small></a>
+                                                    <a href="/loai-sp/@childitem.ID" style="color:black" class="list-group-item list-group-item-action">@childitem.TypeName<small class="text-muted">(10)</small></a>
                                                 }
                                             </div>
                                         }
@@ -131,49 +143,7 @@
 
                 </div>
                 <!--Phân Trang-->
-                @if(ViewBag.TotalPage>1)
-                {
-                    var pageDisplay = (int)(ViewBag.MaxPage);
-                    int totalPage = (int)ViewBag.TotalPage;
-                    int currentPage = ((int)ViewBag.Page);
-
-                    var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
-                    var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
-
-                    var link = "/san-pham/" + prcategory.ID;
-            <div class="middle_list" style="margin-left:110px">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        @if (currentPage > ViewBag.First)
-                        {
-                            <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
-                            <li><a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a></li>
-                        }
-                        @for (int i = startPageIndex; i <= endPageIndex; i++)
-                        {
-                            if (currentPage == i)
-                            {
-                                <li><a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
-                            }
-                        }
-                        @if (currentPage < totalPage)
-                        {
-                            <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
-                            <li><a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
-                        }
-                    </ul>
-                    </nav>
-
-            </div>
-                }
-                else
-                {
-                <span>Không Có Sản Phẩm Nào</span>
-            }
+                
             </div>
         </div>
     </div>

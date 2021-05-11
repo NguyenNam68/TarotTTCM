@@ -27,6 +27,10 @@ namespace Tarot.Model.Service
         {
             return db.ProductTags.Find(id);
         }
+        public List<ProductTag> ListTagByID(int id)
+        {
+            return db.ProductTags.Where(x => x.Status == true && x.ProductID == id).ToList();
+        }
         public bool ChangeStatus(int id)
         {
             var productTag = db.ProductTags.Find(id);

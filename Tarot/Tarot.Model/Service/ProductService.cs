@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tarot.Model.EF;
+using Tarot.Model.ViewModel;
 
 namespace Tarot.Model.Service
 {
@@ -15,23 +16,14 @@ namespace Tarot.Model.Service
         {
             db = new TarotDbContext();
         }
-        public List<ProductCategory> ListAllCategory()
-        {
-            return db.ProductCategories.Where(x => x.Status == true).ToList();
-        }
-        public List<Publisher> ListAllPublisher()
-        {
-            return db.Publishers.Where(x => x.Status == true).ToList();
-        }
         public Product ViewDetail(int id)
         {
             return db.Products.Find(id);
         }
-        public List<Product> ListProduct(ref int totalRecord, int pageIndex, int pageSize)
+        public List<Product> ListProduct()
         {
-            totalRecord = db.Products.Where(x => x.Status == true).Count();
             var model=db.Products.Where(x => x.Status == true).
-                OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                OrderByDescending(x => x.CreatedDate).ToList();
             return model;
         }
         public List<Product> ListNewProduct(int top)
@@ -47,12 +39,36 @@ namespace Tarot.Model.Service
             var product = db.Products.Find(productID);
             return db.Products.Where(x => x.ID != productID &&x.CategoryID==product.CategoryID &&x.Status == true).ToList();
         }
-        public List<Product> ListByCategoryID(int categoryID, ref int totalRecord, int pageIndex, int pageSize)
+        public List<Product> ListByCategoryID(int categoryID, int pageIndex=1, int pageSize=9)
         {
-            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
             var model= db.Products.Where(x => x.CategoryID == categoryID && x.Status == true).
-                OrderByDescending(x=>x.CreatedDate).Skip((pageIndex-1)*pageSize).Take(pageSize).ToList();
+                OrderByDescending(x=>x.CreatedDate).ToList();
             return model;
+        }
+        public List<Product> ListByPublisherID(int publisherID)
+        {
+            var model = db.Products.Where(x => x.PublisherID == publisherID && x.Status == true).
+                OrderByDescending(x => x.CreatedDate).ToList();
+            return model;
+        }
+        public List<ProductTypeViewModel> ListByTypeID(int typeID)
+        {
+            var model = from a in db.Products
+                        join b in db.ProductTags
+                        on a.ID equals b.ProductID
+                        where b.TypeID == typeID
+                        select new ProductTypeViewModel()
+                        {
+                            ID=a.ID,
+                            Image=a.Image,
+                            ProductName=a.ProductName,
+                            TypeID=b.TypeID,
+                            ViewCount=a.ViewCount,
+                            Price=a.Price,
+                            CreatedDate=DateTime.Now,
+
+                        };
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public bool ChangeStatus(int id)
         {

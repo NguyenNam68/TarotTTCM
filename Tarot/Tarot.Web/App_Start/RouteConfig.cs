@@ -14,6 +14,12 @@ namespace Tarot.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Publisher",
+                url: "sanpham-nxb/{publisherid}",
+                defaults: new { controller = "Product", action = "Publisher", id = UrlParameter.Optional }
+           );
+
+            routes.MapRoute(
                 name: "ProductDetail",
                 url: "chi-tiet/{productid}",
                 defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional }
@@ -24,6 +30,12 @@ namespace Tarot.Web
                 url: "san-pham/{categoryid}",
                 defaults: new { controller = "Product", action = "Category", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "ProductType",
+                url: "loai-sp/{typeid}",
+                defaults: new { controller = "Product", action = "Type", id = UrlParameter.Optional }
+           );
 
             routes.MapRoute(
                 name: "Product",
