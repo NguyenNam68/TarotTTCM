@@ -15,14 +15,14 @@ namespace Tarot.Model.Service
         {
             db = new TarotDbContext();
         }
-        public IEnumerable<Feedback> ListFbPaging(string search, int page, int pageSize)
+        public IEnumerable<Feedback> ListFbPaging(string search)
         {
             IQueryable<Feedback> model = db.Feedbacks;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.Name.Contains(search)||x.Email.Contains(search)||x.Content.Contains(search)||x.Phone.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public int Insert(Feedback entity)
         {

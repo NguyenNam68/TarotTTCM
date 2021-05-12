@@ -26,14 +26,14 @@ namespace Tarot.Model.Service
             db.SaveChanges();
             return payment.Status;
         }
-        public IEnumerable<PaymentMethod> DanhSachTTPaging(string search,int page, int pageSize)
+        public IEnumerable<PaymentMethod> DanhSachTTPaging(string search)
         {
             IQueryable<PaymentMethod> model = db.PaymentMethods;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.Name.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public int Insert(PaymentMethod entity)
         {

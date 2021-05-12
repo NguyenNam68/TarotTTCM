@@ -1,9 +1,11 @@
-﻿@model List<Tarot.Model.EF.Product>
+﻿@model PagedList.IPagedList<Tarot.Model.EF.Product>
+@using PagedList.Mvc;
 @{
     var type = (List<Tarot.Model.EF.ProductType>)ViewBag.Type;
     var category = (List<Tarot.Model.EF.ProductCategory>)ViewBag.Category;
     var prcategory = (Tarot.Model.EF.ProductCategory)ViewBag.PrCategory;
     var publisher = (List<Tarot.Model.EF.Publisher>)ViewBag.Publisher;
+    var product = (List<Tarot.Model.EF.Product>)ViewBag.Product;
     ViewBag.Title = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -28,6 +30,7 @@
         <div class="row">
             <div class="col-xl-4 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                 <div class="product-categori">
+                    <!--Tìm kiếm-->
                     @using (Html.BeginForm("Index", "Product", FormMethod.Get))
                     {
                         <div class="search-product">
@@ -42,40 +45,60 @@
                             <h3>Danh mục sản phẩm</h3>
                         </div>
                         <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                            <!--Nhà xuất bản-->
                             <div class="list-group-collapse sub-men">
                                 <a class="list-group-item list-group-item-action" href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">
-                                    Nhà Xuất Bản <small class="text-muted">(100)</small>
+                                    Nhà Xuất Bản <small class="text-muted">(@product.Count())</small>
                                 </a>
                                 <div class="collapse" id="sub-men1" data-parent="#list-group-men">
                                     <div class="list-group">
                                         @foreach (var item in publisher)
                                         {
+                                            var nxb = product.Where(x => x.PublisherID == item.ID);
                                             var url = "/sanpham-nxb/" + item.ID;
-                                            <a href="@url" style="color:black" class="list-group-item list-group-item-action active">@item.Name<small class="text-muted">(50)</small></a>
+                                            <a href="@url" style="color:black" class="list-group-item list-group-item-action active">
+                                                @item.Name
+                                                <small class="text-muted">(@nxb.Count())</small>
+                                            </a>
                                         }
                                     </div>
                                 </div>
                             </div>
+                            <!--Danh mục sản phẩm trái-->
                             @foreach (var cateitem in category)
                             {
+                                var pr = product.Where(x => x.CategoryID == cateitem.ID);
                                 var child = type.Where(x => x.CategoryID == cateitem.ID);
                                 var parentClass = child.Count() > 0 ? "class=collapse data-parent=#list-group-men" : "";
                                 <div class="list-group-collapse sub-men">
-                                    <a class="list-group-item list-group-item-action" href="#@cateitem.ID" data-toggle="collapse" aria-expanded="true" aria-controls="@cateitem.ID">
-                                        @cateitem.CategoryName
-                                        <small class="text-muted">(50)</small>
-                                    </a>
-                                    <div @parentClass id=@cateitem.ID>
-                                        @if (child.Count() > 0)
-                                        {
-                                            <div class="list-group">
-                                                @foreach (var childitem in child)
-                                                {
-                                                    <a href="/loai-sp/@childitem.ID" style="color:black" class="list-group-item list-group-item-action">@childitem.TypeName<small class="text-muted">(10)</small></a>
+                                    @if (child.Count() == 0)
+                                    {
+                                        <a class="list-group-item list-group-item-action" href="@cateitem.ID">
+                                            @cateitem.CategoryName
+                                            <small class="text-muted">(@pr.Count())</small>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="list-group-item list-group-item-action" href="#@cateitem.ID" data-toggle="collapse" aria-expanded="true" aria-controls="@cateitem.ID">
+                                            @cateitem.CategoryName
+                                            <small class="text-muted">(@pr.Count())</small>
+                                        </a>
+                                        <div @parentClass id=@cateitem.ID>
+                                            @if (child.Count() > 0)
+                                            {
+                                                <div class="list-group">
+                                                    @foreach (var childitem in child)
+                                                    {
+                                                        <a href="/loai-sp/@childitem.ID" style="color:black" class="list-group-item list-group-item-action">
+                                                            @childitem.TypeName
+                                                        <small class="text-muted">(@childitem.ProductTags.Count())</small>
+                                                    </a>
                                                 }
-                                            </div>
-                                        }
-                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
                             }
                         </div>
@@ -142,8 +165,17 @@
                     </div>
 
                 </div>
-                <!--Phân Trang-->
-                
+                <!--Phân trang-->
+                <div style="margin-top:10px">
+                    <p>Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount</p>
+                </div>
+                <div class="middle_list" style="margin-left:225px">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            @Html.PagedListPager(Model, page => Url.Action("Category", new { page, @search = ViewBag.Search }))
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

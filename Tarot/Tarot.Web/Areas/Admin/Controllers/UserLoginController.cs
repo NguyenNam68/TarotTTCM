@@ -57,5 +57,10 @@ namespace Tarot.Web.Areas.Admin.Controllers
             }
             return View("Index");
         }
+        public ActionResult LogOut()
+        {
+            Session[Common.CommonConstants.USER_SESSION] = null;
+            return RedirectToAction("Index","UserLogin");
+        }
     }
 }

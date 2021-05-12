@@ -173,6 +173,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CartAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeedbackAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewAdminController.cs" />
@@ -1572,6 +1573,7 @@
     <Content Include="Areas\Admin\Views\ProductTagAdmin\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ProductTagAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeedbackAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CartAdmin\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1616,7 +1618,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="ckfinder\userfiles\files\" />
     <Folder Include="DataImage\files\" />
   </ItemGroup>

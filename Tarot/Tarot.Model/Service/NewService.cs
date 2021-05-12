@@ -30,14 +30,14 @@ namespace Tarot.Model.Service
             db.SaveChanges();
             return news.Status;
         }
-        public IEnumerable<News> DanhSachNPaging(string search, int page, int pageSize)
+        public IEnumerable<News> DanhSachNPaging(string search)
         {
             IQueryable<News> model = db.News;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.Title.Contains(search) || x.Content.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public int Insert(News entity)
         {

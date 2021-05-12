@@ -30,14 +30,14 @@ namespace Tarot.Model.Service
             db.SaveChanges();
             return newcategory.Status;
         }
-        public IEnumerable<NewCategory> ListNewCategoryPaging(string search,int page, int pageSize)
+        public IEnumerable<NewCategory> ListNewCategoryPaging(string search)
         {
             IQueryable<NewCategory> model = db.NewCategories;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.Name.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public int Insert(NewCategory entity)
         {

@@ -28,6 +28,7 @@
         {
             decimal? totalMoney = 0;
             decimal? discount = 0;
+            decimal? total = 0;
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-main table-responsive">
@@ -77,7 +78,15 @@
                                         </td>
                                     </tr>
                                     totalMoney +=item.product.Price* item.Quantity;
-                                    discount = +item.product.PromotionPrice;
+                                    if(item.product.PromotionPrice!=null)
+                                    {
+                                        discount =totalMoney - (item.product.PromotionPrice * item.Quantity);
+                                    }
+                                    else
+                                    {
+                                        discount =0;
+                                    }
+                                    total +=totalMoney-discount;
                                 }
                             </tbody>
                         </table>
@@ -85,16 +94,6 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-lg-4 col-sm-4">
-                    <div class="coupon-box">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control" placeholder="Nhập mã giảm giá" aria-label="Coupon code" type="text">
-                            <div class="input-group-append">
-                                <button id="btnAddCode" class="btn btn-theme" type="button">Thêm mã giảm giá</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-3 col-sm-3" style="margin-left:59px">
                     <div class="coupon-box">
                         <div class="input-group input-group-sm">
@@ -133,14 +132,9 @@
                             <div class="ml-auto font-weight-bold"> @String.Format("{0:n0}", discount.GetValueOrDefault(0))&nbsp;₫ </div>
                         </div>
                         <hr class="my-1">
-                        <div class="d-flex">
-                            <h4>Mã giảm giá</h4>
-                            <div class="ml-auto font-weight-bold"> $ 10 </div>
-                        </div>
-                        <hr>
                         <div class="d-flex gr-total">
                             <h5>Thành tiền</h5>
-                            <div class="ml-auto h5"> $ 388 </div>
+                            <div class="ml-auto h5"> @String.Format("{0:n0}", total)&nbsp;₫ </div>
                         </div>
                         <hr>
                     </div>

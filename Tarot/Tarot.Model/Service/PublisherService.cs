@@ -23,14 +23,14 @@ namespace Tarot.Model.Service
         {
             return db.Publishers.Where(x => x.Status == true).ToList();
         }
-        public IEnumerable<Publisher> DanhSachNXBPaging(string search,int page, int pageSize)
+        public IEnumerable<Publisher> DanhSachNXBPaging(string search)
         {
             IQueryable<Publisher> model = db.Publishers;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.Name.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public bool ChangeStatus(int id)
         {

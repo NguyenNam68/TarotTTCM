@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
         public ActionResult Index(string search,int page = 1, int pageSize = 5)
         {
             var service = new NewCategoryService();
-            var model = service.ListNewCategoryPaging(search,page, pageSize);
+            var model = service.ListNewCategoryPaging(search).ToPagedList(page, pageSize);
             ViewBag.Search = search;
             return View(model);
         }

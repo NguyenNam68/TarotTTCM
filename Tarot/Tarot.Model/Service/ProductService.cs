@@ -20,6 +20,8 @@ namespace Tarot.Model.Service
         {
             return db.Products.Find(id);
         }
+
+        /*List các dữ liệu*/
         public List<Product> ListProduct()
         {
             var model=db.Products.Where(x => x.Status == true).
@@ -36,10 +38,11 @@ namespace Tarot.Model.Service
         }
         public List<Product> ListRelatedProduct(int productID)
         {
+            int top = 12;
             var product = db.Products.Find(productID);
-            return db.Products.Where(x => x.ID != productID &&x.CategoryID==product.CategoryID &&x.Status == true).ToList();
+            return db.Products.Where(x => x.ID != productID &&x.CategoryID==product.CategoryID &&x.Status == true).Take(top).ToList();
         }
-        public List<Product> ListByCategoryID(int categoryID, int pageIndex=1, int pageSize=9)
+        public List<Product> ListByCategoryID(int categoryID)
         {
             var model= db.Products.Where(x => x.CategoryID == categoryID && x.Status == true).
                 OrderByDescending(x=>x.CreatedDate).ToList();
@@ -70,31 +73,60 @@ namespace Tarot.Model.Service
                         };
             return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
-        public bool ChangeStatus(int id)
-        {
-            var product = db.Products.Find(id);
-            product.Status = !product.Status;
-            db.SaveChanges();
-            return product.Status;
-        }
 
-        public bool ChangeHot(int id)
-        {
-            var product = db.Products.Find(id);
-            product.TopHot = !product.TopHot;
-            db.SaveChanges();
-            return product.TopHot;
-        }
-        
-        public IEnumerable<Product> DanhSachSPPaging(string search, int page,int pageSize)
+        /*Phân trang dữ liệu*/
+        public IEnumerable<Product> DanhSachSPPaging(string search)
         {
             IQueryable<Product> model = db.Products;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.ProductName.Contains(search));
             }
-            return model.OrderByDescending(x=>x.CreatedDate).ToPagedList(page,pageSize);
+            return model.OrderByDescending(x=>x.CreatedDate).ToList();
         }
+        public IEnumerable<ProductTypeViewModel> TypePaging(string search,int typeID)
+        {
+            var model = from a in db.Products
+                        join b in db.ProductTags
+                        on a.ID equals b.ProductID
+                        where b.TypeID == typeID
+                        select new ProductTypeViewModel()
+                        {
+                            ID = a.ID,
+                            Image = a.Image,
+                            ProductName = a.ProductName,
+                            TypeID = b.TypeID,
+                            ViewCount = a.ViewCount,
+                            Price = a.Price,
+                            CreatedDate = DateTime.Now,
+
+                        };
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.ProductName.Contains(search));
+            }
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
+        }
+        public IEnumerable<Product> CategoryPaging(string search,int categoryid)
+        {
+            IQueryable<Product> model = db.Products;
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.ProductName.Contains(search));
+            }
+            return model.Where(x=>x.CategoryID==categoryid).OrderByDescending(x => x.CreatedDate).ToList();
+        }
+        public IEnumerable<Product> PublisherPaging(string search, int publisherid)
+        {
+            IQueryable<Product> model = db.Products;
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.ProductName.Contains(search));
+            }
+            return model.Where(x => x.PublisherID == publisherid).OrderByDescending(x => x.CreatedDate).ToList();
+        }
+
+        /*Phương thức Admin*/
         public int Insert(Product entity)
         {
             db.Products.Add(entity);
@@ -133,6 +165,21 @@ namespace Tarot.Model.Service
             {
                 return false;
             }
+        }
+        public bool ChangeStatus(int id)
+        {
+            var product = db.Products.Find(id);
+            product.Status = !product.Status;
+            db.SaveChanges();
+            return product.Status;
+        }
+
+        public bool ChangeHot(int id)
+        {
+            var product = db.Products.Find(id);
+            product.TopHot = !product.TopHot;
+            db.SaveChanges();
+            return product.TopHot;
         }
     }
 }

@@ -1,24 +1,29 @@
 ﻿@model List<Tarot.Web.Models.Cart>
-<div class="side" style="background-color:turquoise;width:290px;margin-top:50px">
+<div class="side" style="background-color:turquoise;width:280px;margin-top:50px">
     <a href="#" class="close-side"><i class="fa fa-times"></i></a>
     @if (Model.Count > 0)
     {
+        decimal? totalMoney = 0; 
         <ul>
             <li class="cart-box">
                 <ul class="cart-list">
 
                     @foreach (var item in Model)
                     {
-                        <li>
-                            <a href="#" class="photo"><img src="@item.product.Image" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">@item.product.ProductName</a></h6>
-                            <p>1x - <span class="price">@item.product.Price</span></p>
-                        </li>
-                    }
-                    <li class="total" style="display:flex">
-                        <a href="#" class="btn btn-default hvr-hover btn-cart" style="color:black;background-color:turquoise">VIEW CART</a>
-                        <span class="float-right"><strong>Total</strong>: $180.00</span>
+                    <li style="height:100%">
+                        <a href="#" class="photo"><img src="@item.product.Image" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">@item.product.ProductName</a></h6>
+                        <p>Số lượng: @item.Quantity</p>
+                        <span class="price" style="margin-left: 64px;">Giá: @String.Format("{0:n0}", item.product.Price)&nbsp;₫</span>
                     </li>
+                        totalMoney += item.product.Price * item.Quantity;
+                    }
+                <li class="total" style="height:100%">
+                    <span class="float-right"><strong>Tổng cộng</strong>: @String.Format("{0:n0}", totalMoney)&nbsp;₫</span>
+                    <a href="/gio-hang/" class="btn btn-default hvr-hover btn-cart" style="color:black;background-color:turquoise;margin-left: 40px;margin-top: 20px;">
+                    XEM GIỎ HÀNG
+                    </a>
+                </li>
                 </ul>
             </li>
         </ul>

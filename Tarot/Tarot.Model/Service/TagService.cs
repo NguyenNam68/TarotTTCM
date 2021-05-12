@@ -19,14 +19,14 @@ namespace Tarot.Model.Service
         {
             return db.Tags.Find(id);
         }
-        public IEnumerable<Tag> ListNameTagPaging(string search,int page, int pageSize)
+        public IEnumerable<Tag> ListNameTagPaging(string search)
         {
             IQueryable<Tag> model = db.Tags;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.NameTag.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public bool ChangeStatus(int id)
         {

@@ -17,7 +17,6 @@
 
         public int ID { get; set; }
 
-
         [Display(Name = "Phương thức thanh toán")]
         [StringLength(500)]
         public string Name { get; set; }

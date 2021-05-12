@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,45 +11,52 @@ namespace Tarot.Web.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string search, int page = 1, int pageSize = 9)
         {
-            var productcategory = new ProductCategoryService().ListAllCategory();
+            var product = new ProductService().DanhSachSPPaging(search).ToPagedList(page,pageSize);
+            ViewBag.Search = search;
             ViewBag.Type = new ProductTypeService().ListType();
-            ViewBag.Product = new ProductService().ListProduct();
+            ViewBag.Category = new ProductCategoryService().ListAllCategory();
             ViewBag.Publisher = new PublisherService().ListAllPublisher();
+            ViewBag.Product = new ProductService().ListProduct();
 
-            return View(productcategory);
+            return View(product);
         }
-        public ActionResult Publisher(int publisherid)
+        public ActionResult Publisher(string search, int publisherid, int page = 1, int pageSize = 9)
         {
+            var model = new ProductService().PublisherPaging(search, publisherid).ToPagedList(page, pageSize);
+
             ViewBag.PrCategory = new ProductCategoryService().ViewDetail(publisherid);
             ViewBag.Type = new ProductTypeService().ListType();
             ViewBag.Category = new ProductCategoryService().ListAllCategory();
             ViewBag.Publisher = new PublisherService().ListAllPublisher();
+            ViewBag.Product = new ProductService().ListProduct();
 
-            var model = new ProductService().ListByPublisherID(publisherid);
             return View(model);
 
         }
-        public ActionResult Category(int categoryid)
+        public ActionResult Category(string search, int categoryid ,int page = 1, int pageSize = 9)
         {
+            var model = new ProductService().CategoryPaging(search, categoryid).ToPagedList(page, pageSize);
+
             ViewBag.PrCategory = new ProductCategoryService().ViewDetail(categoryid);
             ViewBag.Type = new ProductTypeService().ListType();
             ViewBag.Category = new ProductCategoryService().ListAllCategory();
             ViewBag.Publisher = new PublisherService().ListAllPublisher();
+            ViewBag.Product = new ProductService().ListProduct();
 
-            var model = new ProductService().ListByCategoryID(categoryid);
             return View(model);
         }
 
-        public ActionResult Type(int typeid)
+        public ActionResult Type(string search,int typeid,int page=1,int pageSize=9)
         {
+            var model = new ProductService().TypePaging(search ,typeid).ToPagedList(page,pageSize);
+
             ViewBag.PrType = new ProductTypeService().ViewDetail(typeid);
             ViewBag.Type = new ProductTypeService().ListType();
             ViewBag.Category = new ProductCategoryService().ListAllCategory();
             ViewBag.Publisher = new PublisherService().ListAllPublisher();
-
-            var model = new ProductService().ListByTypeID(typeid);
+            ViewBag.Product = new ProductService().ListProduct();
 
             return View(model);
         }

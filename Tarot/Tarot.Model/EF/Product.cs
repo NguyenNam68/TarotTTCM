@@ -15,7 +15,6 @@
         }
 
         public int ID { get; set; }
-
         [Display(Name = "Danh mục sản phẩm")]
         public int CategoryID { get; set; }
 
@@ -64,7 +63,6 @@
 
         [Display(Name = "Tình trạng")]
         public bool Status { get; set; }
-
 
         public virtual ProductCategory ProductCategory { get; set; }
 

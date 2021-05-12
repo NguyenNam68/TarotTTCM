@@ -23,6 +23,10 @@
     <div class="container">
         @if (Model.Count > 0)
         {
+            decimal? totalMoney = 0;
+            decimal? discount = 0;
+            decimal? total = 0;
+            decimal? ship = 25000;
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="row">
@@ -34,13 +38,26 @@
                                 <div class="rounded p-2 bg-light">
                                     @foreach (var item in Model)
                                     {
+                                        totalMoney += item.product.Price * item.Quantity;
+                                        if (item.product.PromotionPrice != null)
+                                        {
+                                            discount = totalMoney - (item.product.PromotionPrice * item.Quantity);
+                                        }
+                                        else
+                                        {
+                                            discount = 0;
+                                        }
+                                        total += totalMoney - discount + ship;
                                         <div class="media mb-2 border-bottom">
                                             <div class="media-body">
                                                 <a href="detail.html"> @item.product.ProductName</a>
-                                                <div class="small text-muted">@String.Format("{0:n0}", @item.product.Price.GetValueOrDefault(0))&nbsp;₫ <span class="mx-2">|</span> Qty: @item.Quantity <span class="mx-2">|</span> Subtotal: @String.Format("{0:n0}", item.product.Price.GetValueOrDefault(0) * item.Quantity)&nbsp;₫</div>
+                                                <div class="small text-muted">
+                                                    @String.Format("{0:n0}", @item.product.Price.GetValueOrDefault(0))&nbsp;₫
+                                                <span class="mx-2">|</span> Số lượng: @item.Quantity <span class="mx-2">|</span> Thành tiền: @String.Format("{0:n0}", total.GetValueOrDefault(0))&nbsp;₫
                                             </div>
                                         </div>
-                                    }
+                                    </div>
+                                }
                                 </div>
                             </div>
                         </div>
@@ -55,25 +72,21 @@
                                 <hr class="my-1">
                                 <div class="d-flex">
                                     <h4>Tổng tiền</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 440 </div>
+                                    <div class="ml-auto font-weight-bold">@String.Format("{0:n0}", totalMoney.GetValueOrDefault(0))&nbsp;₫ </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Giảm giá</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 40 </div>
+                                    <div class="ml-auto font-weight-bold"> @String.Format("{0:n0}", discount.GetValueOrDefault(0))&nbsp;₫ </div>
                                 </div>
                                 <hr class="my-1">
                                 <div class="d-flex">
-                                    <h4>Mã giảm giá</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 10 </div>
-                                </div>
-                                <div class="d-flex">
                                     <h4>Phí vận chuyển</h4>
-                                    <div class="ml-auto font-weight-bold"> Free </div>
+                                    <div class="ml-auto font-weight-bold">@String.Format("{0:n0}", ship.GetValueOrDefault(0))&nbsp;₫ </div>
                                 </div>
                                 <hr>
                                 <div class="d-flex gr-total">
                                     <h5>Thành tiền</h5>
-                                    <div class="ml-auto h5"> $ 388 </div>
+                                    <div class="ml-auto h5"><input style="text-align:right" disabled type="text" class="form-control" id="totalprice" name="totalprice" placeholder="" value="@String.Format("{0:n0}", total.GetValueOrDefault(0))&nbsp;₫"></div>
                                 </div>
                                 <hr>
                             </div>
@@ -92,13 +105,14 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="lastName">Họ Tên người nhận *</label>
-                                            <input type="text" class="form-control" id="lastName" name="shipName" placeholder="" value="" required>
+                                            <input type="text" class="form-control" id="shipName" name="shipName" placeholder="" value="" required>
                                             <div class="invalid-feedback"> Bạn phải nhập họ và tên </div>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="email">Email </label>
                                         <input type="email" class="form-control" id="email" name="email" style="width:300px" placeholder="">
+                                        <div class="invalid-feedback"> Vui lòng nhập email </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="address">Địa chỉ *</label>
@@ -114,16 +128,16 @@
                                     </div>
                                     <div class="col-12 d-flex shopping-box"> <button type="submit" class="btn" style="margin-left:400px">Thanh Toán</button></div>
                                 </form>
-                            </div> 
+                            </div>
                         }
                     </div>
                 </div>
             </div>
         }
-            else
-            {
-                <span class="alert alert-danger">HIỆN TẠI BẠN ĐANG KHÔNG CÓ ĐƠN HÀNG NÀO</span>
-            }
+        else
+        {
+            <span class="alert alert-danger">HIỆN TẠI BẠN ĐANG KHÔNG CÓ ĐƠN HÀNG NÀO</span>
+        }
 
     </div>
 </div>

@@ -15,6 +15,7 @@
         }
 
         public int ID { get; set; }
+
         [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
 

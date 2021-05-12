@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace Tarot.Web.Areas.Admin.Controllers
         {
             var service = new FeedbackService();
 
-            var model = service.ListFbPaging(search, page, pageSize);
+            var model = service.ListFbPaging(search).ToPagedList(page, pageSize);
             ViewBag.Search = search;
             return View(model);
         }

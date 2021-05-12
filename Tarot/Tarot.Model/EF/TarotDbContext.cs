@@ -26,6 +26,7 @@ namespace Tarot.Model.EF
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<RegisterStudent> RegisterStudents { get; set; }
+        public virtual DbSet<Statistical> Statisticals { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -76,12 +77,21 @@ namespace Tarot.Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
+                .Property(e => e.TotalMoney)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Order>()
                 .Property(e => e.CustomerID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.ShipMobile)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(e => e.OrderDetails)
+                .WithRequired(e => e.Order)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.Price)
@@ -156,6 +166,10 @@ namespace Tarot.Model.EF
             modelBuilder.Entity<RegisterStudent>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Statistical>()
+                .Property(e => e.Revenue)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Store>()
                 .Property(e => e.Phone)

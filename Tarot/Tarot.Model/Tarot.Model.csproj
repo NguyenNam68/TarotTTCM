@@ -73,11 +73,13 @@
     <Compile Include="EF\ProductType.cs" />
     <Compile Include="EF\Publisher.cs" />
     <Compile Include="EF\RegisterStudent.cs" />
+    <Compile Include="EF\Statistical.cs" />
     <Compile Include="EF\Store.cs" />
     <Compile Include="EF\Tag.cs" />
     <Compile Include="EF\TarotDbContext.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\CartService.cs" />
     <Compile Include="Service\FeedbackService.cs" />
     <Compile Include="Service\NewCategoryService.cs" />
     <Compile Include="Service\NewService.cs" />

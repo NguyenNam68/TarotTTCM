@@ -38,14 +38,14 @@ namespace Tarot.Model.Service
             db.SaveChanges();
             return productTag.Status;
         }
-        public IEnumerable<ProductTag> DanhSachPTPaging(string search, int page, int pageSize)
+        public IEnumerable<ProductTag> DanhSachPTPaging(string search)
         {
             IQueryable<ProductTag> model = db.ProductTags;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.NameTag.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public int Insert(ProductTag entity)
         {

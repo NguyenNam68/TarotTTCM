@@ -19,14 +19,14 @@ namespace Tarot.Model.Service
         {
             return db.Users.Find(id);
         }
-        public IEnumerable<User> ListUserPaging(string search, int page, int pageSize)
+        public IEnumerable<User> ListUserPaging(string search)
         {
             IQueryable<User> model = db.Users;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.UserName.Contains(search)||x.Email.Contains(search)||x.Name.Contains(search)||x.Address.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public bool ChangeStatus(int id)
         {

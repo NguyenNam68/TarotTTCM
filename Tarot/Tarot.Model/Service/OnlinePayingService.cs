@@ -30,14 +30,14 @@ namespace Tarot.Model.Service
             db.SaveChanges();
             return onlinePaying.Status;
         }
-        public IEnumerable<OnlinePaying> DanhSachOPPaging(string search, int page, int pageSize)
+        public IEnumerable<OnlinePaying> DanhSachOPPaging(string search)
         {
             IQueryable<OnlinePaying> model = db.OnlinePayings;
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(x => x.CodeAccount.Contains(search)||x.Address.Contains(search)||x.NameAccount.Contains(search)||x.NamePay.Contains(search));
             }
-            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.CreatedDate).ToList();
         }
         public int Insert(OnlinePaying entity)
         {

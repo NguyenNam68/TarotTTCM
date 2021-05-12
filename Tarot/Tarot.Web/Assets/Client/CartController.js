@@ -9,6 +9,12 @@
         $('#btnPayment').off('click').on('click', function () {
             window.location.href = "/thanh-toan";
         });
+        $('#inputcode').change(function () {
+            $('.codeDiscount').text('20,000');
+        });
+        $('#btnAddCode').click(function () {
+            $('#inputcode').change();
+        });
         $('#btnUpdate').off('click').on('click', function () {
             var listproduct = $('.txtQuantity');
             var cartlist = [];

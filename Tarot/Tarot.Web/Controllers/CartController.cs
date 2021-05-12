@@ -112,7 +112,7 @@ namespace Tarot.Web.Controllers
             order.ShipAddress = address;
             order.ShipEmail = email;
             order.ShipMobile = mobile;
-            order.ShipName = mobile;
+            order.ShipName = shipName;
             order.Status = false;
 
             try
