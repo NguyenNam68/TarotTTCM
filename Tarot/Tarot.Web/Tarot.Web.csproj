@@ -230,6 +230,7 @@
     <Content Include="Areas\Layout\images\apus.jpg" />
     <Content Include="Areas\Layout\images\mystichouse.png" />
     <Content Include="Areas\Layout\js\bootstrap-datetimepicker.js" />
+    <Content Include="Areas\Layout\js\controller\CartAdmin.js" />
     <Content Include="Areas\Layout\js\controller\FeedbackController.js" />
     <Content Include="Areas\Layout\js\controller\NewCategoryController.js" />
     <Content Include="Areas\Layout\js\controller\NewController.js" />
@@ -1574,6 +1575,7 @@
     <Content Include="Areas\Admin\Views\ProductTagAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeedbackAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CartAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CartAdmin\Detail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

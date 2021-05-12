@@ -19,6 +19,10 @@ namespace Tarot.Model.Service
         {
             return db.Users.Find(id);
         }
+        public List<User>  ListUser()
+        {
+            return db.Users.ToList();
+        }
         public IEnumerable<User> ListUserPaging(string search)
         {
             IQueryable<User> model = db.Users;

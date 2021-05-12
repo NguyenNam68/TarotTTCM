@@ -22,16 +22,22 @@ namespace Tarot.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /*VIEW DROPDOWN CATEGORY*/
         public void SetViewBagCategory(int? selectedCategoryID = null)
         {
             var service = new ProductCategoryService();
             ViewBag.CategoryID = new SelectList(service.ListAllCategory(), "ID", "CategoryName", selectedCategoryID);
         }
+
+        /*VIEW DROPDOWN PUBLISHER*/
         public void SetViewBagPublisher(int? selectedPublisherID = null)
         {
             var service = new PublisherService();
             ViewBag.PublisherID = new SelectList(service.ListAllPublisher(), "ID", "Name", selectedPublisherID);
         }
+
+        /*VIEW CREATE PRODUCT*/
         [HttpGet]
         public ActionResult Create()
         {
@@ -39,6 +45,8 @@ namespace Tarot.Web.Areas.Admin.Controllers
             SetViewBagPublisher();
             return View();
         }
+
+        /*PHƯƠNG THỨC TẠO MỚI PRODUCT*/
         [HttpPost]
         public ActionResult CreateProduct(Product product)
         {
@@ -60,6 +68,8 @@ namespace Tarot.Web.Areas.Admin.Controllers
             SetViewBagPublisher(product.PublisherID);
             return View("Index");
         }
+
+        /*VIEW EDIT PRODUCT*/
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -68,6 +78,8 @@ namespace Tarot.Web.Areas.Admin.Controllers
             SetViewBagPublisher(product.PublisherID);
             return View(product);
         }
+
+        /*PHƯƠNG THỨC TRUYỀN DỮ LIỆU VÀO EDIT*/
         [HttpPost]
         public ActionResult Edit(Product product)
         {
@@ -89,12 +101,16 @@ namespace Tarot.Web.Areas.Admin.Controllers
             SetViewBagPublisher(product.PublisherID);
             return View("Index");
         }
+
+        /*PHƯƠNG THỨC XÓA PRODUCT*/
         public ActionResult Delete(int id)
         {
             new ProductService().Delete(id);
 
             return RedirectToAction("Index");
         }
+
+        /*PHƯƠNG THỨC THAY ĐỔI TRẠNG THÁI*/
         [HttpPost]
         public JsonResult ChangeStatus(int id)
         {
@@ -104,6 +120,8 @@ namespace Tarot.Web.Areas.Admin.Controllers
                 status = result
             });
         }
+
+        /*PHƯƠNG THỨC THAY ĐỔI HOT*/
         [HttpPost]
         public JsonResult ChangeHot(int id)
         {

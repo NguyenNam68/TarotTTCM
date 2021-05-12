@@ -1,0 +1,57 @@
+﻿@model List<Tarot.Model.ViewModel.OrderViewModel>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
+    decimal? total = 0;
+    int id = 0;
+    var order = Model.Where(x => x.OrderID == id);
+}
+@foreach (var item in Model)
+{
+    id = item.OrderID;
+}
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card" style="margin-left: 300px;width: 600px;">
+                        @using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Get))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="card-header" style="text-align:center;color: steelblue;">
+                                <strong>Chi Tiết Đơn Hàng</strong>
+                            </div>
+                            <div class="card-body card-block" style="background:#00ffff;color: black;">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <h2>Mã số đơn hàng: @id</h2>
+
+                                @foreach (var item in order)
+                                {
+                                    total += item.Price * item.Quantity + 25000;
+                                    <hr />
+                                    <p>Tên sản phẩm :  @item.ProductName</p>
+                                    <p>Số lượng:  @item.Quantity</p>
+                                    <p>Đơn giá:  @String.Format("{0:n0}",item.Price.GetValueOrDefault(0))&nbsp;₫</p>
+                                    <p>Thành tiền:  @String.Format("{0:n0}", total.GetValueOrDefault(0))&nbsp;₫</p>
+                                    <p>Ngày đặt hàng: @item.DateOrder</p>
+                                    <hr />
+                                }
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group" style="display:flex">
+                                    <div style="margin-top:12px">
+                                        @Html.ActionLink("Quay lại", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

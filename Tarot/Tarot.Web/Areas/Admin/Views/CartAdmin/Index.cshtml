@@ -5,6 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_MainAdmin.cshtml";
 }
 @section jsFooter{
+    <script src="~/Areas/Layout/js/controller/CartAdmin.js"></script>
 }
 <div class="main-content">
     <div class="section__content section__content--p30">
@@ -59,16 +60,6 @@
                                         <td>
                                             <div class="table-data-feature item">
                                                 <a href="@Url.Action("Detail", new { id = @item.ID })"> Chi tiết</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="table-data-feature item">
-                                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-                                           {
-                                               Confirm = "Bạn có chắc chắn muốn xóa không?",
-                                               OnComplete = "$('#row_" + @item.ID + "').remove()",
-                                               HttpMethod = "Delete"
-                                           })
                                             </div>
                                         </td>
                                     </tr>

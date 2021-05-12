@@ -14,6 +14,10 @@ namespace Tarot.Model.Service
         {
             db = new TarotDbContext();
         }
+        public List<Order> ListOrders()
+        {
+            return db.Orders.Where(x => x.Status == true).ToList();
+        }
         public int Insert(Order order)
         {
             db.Orders.Add(order);

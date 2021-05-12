@@ -18,5 +18,19 @@ namespace Tarot.Web.Areas.Admin.Controllers
             ViewBag.Search = search;
             return View(model);
         }
+        public ActionResult Detail(int id)
+        {
+            var model = new OrderDetailService().ListOrderDetail(id);
+            return View(model);
+        }
+        [HttpPost]
+        public JsonResult CheckOrder(int id)
+        {
+            var check = new OrderDetailService().CheckOrder(id);
+            return Json(new
+            {
+                status = check
+            });
+        }
     }
 }

@@ -17,6 +17,35 @@ namespace Tarot.Web.Controllers
             ViewBag.HotProducts = product.ListHotProduct(4);
             return View();
         }
+
+        /*HOME MENU PRODUCT CATEGORY*/
+        [ChildActionOnly]
+        public PartialViewResult ProductCategory()
+        {
+            var model = new ProductCategoryService().ListAllCategory();
+            return PartialView(model);
+
+        }
+
+        /*HOME MENU KIEN THUC CATEGORY*/
+        [ChildActionOnly]
+        public ActionResult KTTarot()
+        {
+            var model = new NewCategoryService().ListByGroupID(1);
+
+            return PartialView(model);
+        }
+
+        /*HOME MENU Y NGHIA CATEGORY*/
+        [ChildActionOnly]
+        public ActionResult YNTarot()
+        {
+            var model = new NewCategoryService().ListByGroupID(2);
+
+            return PartialView(model);
+        }
+
+        /*HOME MENU CART PRODUCT CATEGORY*/
         [ChildActionOnly]
         public PartialViewResult HeaderCart()
         {
@@ -28,29 +57,6 @@ namespace Tarot.Web.Controllers
             }
             return PartialView(list);
 
-        }
-        [ChildActionOnly]
-        public PartialViewResult ProductCategory()
-        {
-            var model = new ProductCategoryService().ListAllCategory();
-            return PartialView(model);
-
-        }
-
-        [ChildActionOnly]
-        public ActionResult KTTarot()
-        {
-            var model = new NewCategoryService().ListByGroupID(1);
-
-            return PartialView(model);
-        }
-
-        [ChildActionOnly]
-        public ActionResult YNTarot()
-        {
-            var model = new NewCategoryService().ListByGroupID(2);
-
-            return PartialView(model);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Tarot.Web.Controllers
 {
     public class ProductController : Controller
     {
+        /*ALL PRODUCT*/
         // GET: Product
         public ActionResult Index(string search, int page = 1, int pageSize = 9)
         {
@@ -22,6 +23,8 @@ namespace Tarot.Web.Controllers
 
             return View(product);
         }
+
+        /*ALL PRODUCT FOLLOW PUBLISHER*/
         public ActionResult Publisher(string search, int publisherid, int page = 1, int pageSize = 9)
         {
             var model = new ProductService().PublisherPaging(search, publisherid).ToPagedList(page, pageSize);
@@ -35,6 +38,8 @@ namespace Tarot.Web.Controllers
             return View(model);
 
         }
+
+        /*ALL PRODUCT FOLLOW CATEGORY*/
         public ActionResult Category(string search, int categoryid ,int page = 1, int pageSize = 9)
         {
             var model = new ProductService().CategoryPaging(search, categoryid).ToPagedList(page, pageSize);
@@ -48,6 +53,7 @@ namespace Tarot.Web.Controllers
             return View(model);
         }
 
+        /*ALL PRODUCT FOLLOW TYPE*/
         public ActionResult Type(string search,int typeid,int page=1,int pageSize=9)
         {
             var model = new ProductService().TypePaging(search ,typeid).ToPagedList(page,pageSize);
@@ -61,7 +67,7 @@ namespace Tarot.Web.Controllers
             return View(model);
         }
 
-
+        /*DETAIL PRODUCT*/
         public ActionResult Detail(int productid)
         {
             var product = new ProductService().ViewDetail(productid);
